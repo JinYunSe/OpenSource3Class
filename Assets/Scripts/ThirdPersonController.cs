@@ -97,6 +97,8 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
+        private int _animIDMouseLeft;
+        private int _animIDMouseRight;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
@@ -159,6 +161,18 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            MouseLeft();
+            MouseRight();
+        }
+
+        private void MouseLeft()
+        {
+            if (_hasAnimator) _animator.SetBool(_animIDMouseLeft, _input.mouseLeft);
+        }
+
+        private void MouseRight()
+        {
+            if (_hasAnimator) _animator.SetBool(_animIDMouseRight, _input.mouseRight);
         }
 
         private void LateUpdate()
@@ -173,6 +187,8 @@ namespace StarterAssets
             _animIDJump = Animator.StringToHash("Jump");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            _animIDMouseLeft = Animator.StringToHash("MouseLeft");
+            _animIDMouseRight = Animator.StringToHash("MouseRight");
         }
 
         private void GroundedCheck()

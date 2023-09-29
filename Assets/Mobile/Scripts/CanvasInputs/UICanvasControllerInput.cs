@@ -28,6 +28,15 @@ namespace StarterAssets
             starterAssetsInputs.SprintInput(virtualSprintState);
         }
         
+        public void VirtualMouseLeftInput(bool virtualSprintState)
+        {
+            starterAssetsInputs.MouseLeftInput(virtualSprintState);
+        }
+
+        public void VirtualMouseRightInput(bool virtualSprintState)
+        {
+            starterAssetsInputs.MouseRightInput(virtualSprintState);
+        }
     }
 
 }
