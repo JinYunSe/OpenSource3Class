@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using Cinemachine;
+using Photon.Pun;
+using UnityEngine;
+using Photon.Realtime;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -112,6 +115,10 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
+        [SerializeField] private GameObject CameraRoot;
+        private PhotonView pv;
+        private CinemachineVirtualCamera virtualCamera;
+
         private bool IsCurrentDeviceMouse
         {
             get
@@ -137,7 +144,7 @@ namespace StarterAssets
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -149,6 +156,16 @@ namespace StarterAssets
 
             AssignAnimationIDs();
 
+            pv = GetComponent<PhotonView>();
+            virtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+
+            // 자신의 캐릭터일 경우 시네머신 카메라를 연결
+            if (pv.IsMine)
+            {
+                virtualCamera.Follow = CameraRoot.transform;
+                virtualCamera.LookAt = CameraRoot.transform;
+            }
+
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
@@ -156,18 +173,18 @@ namespace StarterAssets
 
         private void Update()
         {
+            if (!pv.IsMine) return;
             _hasAnimator = TryGetComponent(out _animator);
-
-            JumpAndGravity();
             GroundedCheck();
-            Move();
             MouseLeft();
             MouseRight();
+            Move();
+            JumpAndGravity();
         }
 
         private void MouseLeft()
         {
-            if (_hasAnimator) _animator.SetBool(_animIDMouseLeft, _input.mouseLeft);
+           if(_hasAnimator) _animator.SetBool(_animIDMouseLeft, _input.mouseLeft);
         }
 
         private void MouseRight()
