@@ -9,9 +9,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 {
     //버전 입력
     private readonly string version = "1.0f";
-    //사용자 아이디 입력
-    //향후 입력으로 받아서 적용되게 만들어야 함
-    private string userId = "Mary";
     [Header("리스폰 장소 그룹")]
     [SerializeField] private GameObject SpawnPointGroup;
 
@@ -26,8 +23,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.GameVersion = version;
 
         // 유저 ID 할당
-        PhotonNetwork.NickName = userId;
-        
+        PhotonNetwork.NickName = PhotonHandler.Instance.nickName;
+        Debug.Log("유저 NickName : "+PhotonNetwork.NickName);
         // 포톤 서버와 통신 횟수 설정. 초당 30회
         Debug.Log(PhotonNetwork.SendRate);
 

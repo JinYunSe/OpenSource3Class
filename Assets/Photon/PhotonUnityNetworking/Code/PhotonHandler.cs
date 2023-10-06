@@ -27,9 +27,8 @@ namespace Photon.Pun
     /// </summary>
     public class PhotonHandler : ConnectionHandler, IInRoomCallbacks, IMatchmakingCallbacks
     {
-
         private static PhotonHandler instance;
-        internal static PhotonHandler Instance
+        public static PhotonHandler Instance
         {
             get
             {
@@ -48,6 +47,7 @@ namespace Photon.Pun
             }
         }
 
+        public string nickName;
 
         /// <summary>Limits the number of datagrams that are created in each LateUpdate.</summary>
         /// <remarks>Helps spreading out sending of messages minimally.</remarks>
