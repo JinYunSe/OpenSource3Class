@@ -9,8 +9,9 @@ public class SceneLoadScript : MonoBehaviour
 	private Text nickName;
 	public void LoadScene(int idx)
 	{
-		if (nickName.text == null) return;
-		PhotonHandler.Instance.nickName = nickName.text;
+        string replaceNickName = nickName.text.Replace(" ", string.Empty);
+        if (replaceNickName == string.Empty) return;
+		PhotonHandler.Instance.nickName = replaceNickName;
         SceneManager.LoadScene(idx);
 		Debug.Log("접속한 방 : "+idx);
 	}
