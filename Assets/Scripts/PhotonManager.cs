@@ -14,6 +14,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+        Debug.Log("유저 NickName : " + PhotonNetwork.NickName);
         // 같은 룸의 유저들에게 자동으로 씬을 로딩
         PhotonNetwork.AutomaticallySyncScene = true;
         // 같은 버전의 유저끼리 접속 허용
@@ -21,8 +22,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         // 오류 발생이 될 수 있기 때문에 같은 버전의 유저끼리만 입장
 
         PhotonNetwork.GameVersion = version;
-
-        Debug.Log("유저 NickName : "+PhotonNetwork.NickName);
         // 포톤 서버와 통신 횟수 설정. 초당 30회
         Debug.Log(PhotonNetwork.SendRate);
 

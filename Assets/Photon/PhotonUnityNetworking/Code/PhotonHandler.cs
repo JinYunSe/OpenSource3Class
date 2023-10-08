@@ -124,6 +124,8 @@ namespace Photon.Pun
 
         protected void Start()
         {
+            // 컴퓨터, 모니터에 따라 프레임이 다르기 때문에 프레임 제한 설정
+            Application.targetFrameRate = 60;
             UnityEngine.SceneManagement.SceneManager.sceneLoaded += (scene, loadingMode) =>
             {
                 PhotonNetwork.NewSceneLoaded();
