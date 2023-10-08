@@ -47,8 +47,6 @@ namespace Photon.Pun
             }
         }
 
-        public string nickName;
-
         /// <summary>Limits the number of datagrams that are created in each LateUpdate.</summary>
         /// <remarks>Helps spreading out sending of messages minimally.</remarks>
         public static int MaxDatagrams = 10;

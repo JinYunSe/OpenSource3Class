@@ -22,8 +22,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         PhotonNetwork.GameVersion = version;
 
-        // 유저 ID 할당
-        PhotonNetwork.NickName = PhotonHandler.Instance.nickName;
         Debug.Log("유저 NickName : "+PhotonNetwork.NickName);
         // 포톤 서버와 통신 횟수 설정. 초당 30회
         Debug.Log(PhotonNetwork.SendRate);
