@@ -21,9 +21,6 @@ namespace StarterAssets
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
 
-        [Tooltip("Sprint speed of the character in m/s")]
-        public float SprintSpeed = 5.335f;
-
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
@@ -101,7 +98,7 @@ namespace StarterAssets
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
         private int _animIDMouseLeft;
-        private int _animIDMouseRight;
+        //private int _animIDMouseRight;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
@@ -114,6 +111,9 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
+        private bool isMouseLeft = false;
+        private bool isMouseDirection = false;
+        private bool isJump = false;
 
         [SerializeField] private GameObject CameraRoot;
         private PhotonView pv;
@@ -173,24 +173,41 @@ namespace StarterAssets
 
         private void Update()
         {
-            if (!pv.IsMine) return;
+            if (!pv.IsMine || isMouseDirection) return;
             _hasAnimator = TryGetComponent(out _animator);
-            GroundedCheck();
-            MouseLeft();
-            MouseRight();
-            Move();
             JumpAndGravity();
+            GroundedCheck();
+            Move();
+            MouseLeft();
+            //MouseRight();
         }
 
         private void MouseLeft()
         {
-           if(_hasAnimator) _animator.SetBool(_animIDMouseLeft, _input.mouseLeft);
+            if (_hasAnimator && Grounded && !isJump && _input.mouseLeft && !isMouseLeft)
+            {
+                _controller.Move(Vector3.zero);
+                _animator.SetTrigger(_animIDMouseLeft);
+                isMouseLeft = true;
+                isMouseDirection = true;
+            }
         }
 
-        private void MouseRight()
+        private void EndMouseLeft()
+        {
+            isMouseLeft = false;
+            _input.mouseLeft = false;
+        }
+
+        private void EndDirection()
+        {
+            isMouseDirection = false;
+        }
+
+        /*private void MouseRight()
         {
             if (_hasAnimator) _animator.SetBool(_animIDMouseRight, _input.mouseRight);
-        }
+        }*/
 
         private void LateUpdate()
         {
@@ -205,7 +222,7 @@ namespace StarterAssets
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
             _animIDMouseLeft = Animator.StringToHash("MouseLeft");
-            _animIDMouseRight = Animator.StringToHash("MouseRight");
+            //_animIDMouseRight = Animator.StringToHash("MouseRight");
         }
 
         private void GroundedCheck()
@@ -247,7 +264,7 @@ namespace StarterAssets
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            float targetSpeed = MoveSpeed;
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
@@ -300,6 +317,8 @@ namespace StarterAssets
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
+            if (isMouseLeft) return;
+
             // move the player
             _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
@@ -322,8 +341,9 @@ namespace StarterAssets
                 // update animator if using character
                 if (_hasAnimator)
                 {
-                    _animator.SetBool(_animIDJump, false);
-                    _animator.SetBool(_animIDFreeFall, false);
+                    isJump = false;
+                    _animator.SetBool(_animIDJump, isJump);
+                    _animator.SetBool(_animIDFreeFall, isJump);
                 }
 
                 // stop our velocity dropping infinitely when grounded
@@ -341,7 +361,8 @@ namespace StarterAssets
                     // update animator if using character
                     if (_hasAnimator)
                     {
-                        _animator.SetBool(_animIDJump, true);
+                        isJump = true;
+                        _animator.SetBool(_animIDJump, isJump);
                     }
                 }
 

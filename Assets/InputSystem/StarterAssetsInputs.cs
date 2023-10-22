@@ -12,7 +12,6 @@ namespace StarterAssets
 		public Vector2 move;
 		public Vector2 look;
 		public bool jump;
-		public bool sprint;
         public bool mouseLeft;
         public bool mouseRight;
 
@@ -40,9 +39,9 @@ namespace StarterAssets
 		public void OnJump(InputValue value)
 		{
 			JumpInput(value.isPressed);
-		}
+        }
 
-		public void OnMouseLeft(InputValue value)
+        public void OnMouseLeft(InputValue value)
 		{
             MouseLeftInput(value.isPressed);
 		}
@@ -51,15 +50,10 @@ namespace StarterAssets
 		{
             MouseRightInput(value.isPressed);
         }
-
-        public void OnSprint(InputValue value)
-		{
-			SprintInput(value.isPressed);
-		}
 #endif
 
 
-		public void MoveInput(Vector2 newMoveDirection)
+        public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
 		} 
@@ -72,11 +66,6 @@ namespace StarterAssets
 		public void JumpInput(bool newJumpState)
 		{
 			jump = newJumpState;
-		}
-
-		public void SprintInput(bool newSprintState)
-		{
-			sprint = newSprintState;
 		}
 
         public void MouseLeftInput(bool isMouseLeft)

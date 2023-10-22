@@ -16,7 +16,7 @@ MonoBehaviour:
   AutoSelectOnPrefabOpen: 0
   AutoIncludeChildSkinnedMeshes: 1
   AutoSkinnedForce256Triangles: 1
-  AutoSkinnedMinBoneWeight: 0.86528736
+  AutoSkinnedMinBoneWeight: 0.311183
   AutoSkinnedMinRealignAngle: 2.4
   AutoSkinnedAllowRealign: 1
   AutoSkinnedColliderType: 3
