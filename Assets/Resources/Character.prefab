@@ -3435,7 +3435,7 @@ MonoBehaviour:
   GroundedRadius: 0.28
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 513
   CinemachineCameraTarget: {fileID: 2697532080618970346}
   TopClamp: 70
   BottomClamp: -30
@@ -3456,9 +3456,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pushLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16
   canPush: 0
-  strength: 1.1
+  strength: 2
 --- !u!114 &894136830918335318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3495,9 +3495,6 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: MouseRight
-  - Type: 3
-    SynchronizeType: 0
-    Name: AirOrSlide
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
