@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,8 +17,9 @@ public class Bounce : MonoBehaviour
 			if (collision.gameObject.tag == "Player")
 			{
 				hitDir = contact.normal;
-				collision.gameObject.GetComponent<CharacterControls>().HitPlayer(-hitDir * force, stunTime);
-				return;
+                Debug.Log(PhotonNetwork.LocalPlayer.NickName + " : " + hitDir);
+                //collision.gameObject.GetComponent<CharacterControls>().HitPlayer(-hitDir * force, stunTime);
+                return;
 			}
 		}
 		/*if (collision.relativeVelocity.magnitude > 2)
