@@ -2,6 +2,8 @@
 using Photon.Pun;
 using UnityEngine;
 using Photon.Realtime;
+using Unity.VisualScripting;
+using System.Collections;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -118,6 +120,9 @@ namespace StarterAssets
         [SerializeField] private GameObject CameraRoot;
         private PhotonView pv;
         private CinemachineVirtualCamera virtualCamera;
+        [SerializeField]
+        private Rigidbody rigidbody;
+
 
         private bool IsCurrentDeviceMouse
         {
@@ -144,7 +149,6 @@ namespace StarterAssets
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -165,7 +169,7 @@ namespace StarterAssets
                 virtualCamera.Follow = CameraRoot.transform;
                 virtualCamera.LookAt = CameraRoot.transform;
             }
-
+            rigidbody.GetComponent<Rigidbody>();
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
@@ -441,6 +445,11 @@ namespace StarterAssets
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
+        }
+
+        public void HitPlayer(Vector3 velocityF)
+        {
+            
         }
     }
 }

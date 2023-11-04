@@ -1,7 +1,9 @@
 ﻿using Photon.Pun;
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.ThirdPerson.PunDemos;
 
 public class Bounce : MonoBehaviour
 {
@@ -13,23 +15,13 @@ public class Bounce : MonoBehaviour
 	{
 		foreach (ContactPoint contact in collision.contacts)
 		{
-			Debug.DrawRay(contact.point, contact.normal, Color.white);
 			if (collision.gameObject.tag == "Player")
 			{
 				hitDir = contact.normal;
                 Debug.Log(PhotonNetwork.LocalPlayer.NickName + " : " + hitDir);
-                //collision.gameObject.GetComponent<CharacterControls>().HitPlayer(-hitDir * force, stunTime);
+                collision.gameObject.GetComponent<ThirdPersonController>().HitPlayer(-hitDir * force);
                 return;
 			}
 		}
-		/*if (collision.relativeVelocity.magnitude > 2)
-		{
-			if (collision.gameObject.tag == "Player")
-			{
-				//Debug.Log("Hit");
-				collision.gameObject.GetComponent<CharacterControls>().HitPlayer(-hitDir*force, stunTime);
-			}
-			//audioSource.Play();
-		}*/
 	}
 }
