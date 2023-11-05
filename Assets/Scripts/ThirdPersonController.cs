@@ -120,9 +120,6 @@ namespace StarterAssets
         [SerializeField] private GameObject CameraRoot;
         private PhotonView pv;
         private CinemachineVirtualCamera virtualCamera;
-        [SerializeField]
-        private Rigidbody rigidbody;
-
 
         private bool IsCurrentDeviceMouse
         {
@@ -169,7 +166,6 @@ namespace StarterAssets
                 virtualCamera.Follow = CameraRoot.transform;
                 virtualCamera.LookAt = CameraRoot.transform;
             }
-            rigidbody.GetComponent<Rigidbody>();
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
