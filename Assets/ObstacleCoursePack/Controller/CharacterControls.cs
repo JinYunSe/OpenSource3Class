@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cinemachine;
+using Photon.Pun;
 
 [RequireComponent (typeof (Rigidbody))]
 [RequireComponent (typeof (CapsuleCollider))]
@@ -14,7 +16,6 @@ public class CharacterControls : MonoBehaviour {
 	public float maxFallSpeed = 20.0f;
 	public float rotateSpeed = 25f; //Speed the player rotate
 	private Vector3 moveDir;
-	public GameObject cam;
 	private Rigidbody rb;
 
 	private float distToGround;
@@ -28,9 +29,13 @@ public class CharacterControls : MonoBehaviour {
 	public Vector3 checkPoint;
 	private bool slide = false;
 
-	void  Start (){
-		// get the distance to ground
-		distToGround = GetComponent<Collider>().bounds.extents.y;
+    public	GameObject _mainCamera;
+    private PhotonView pv;
+
+    void  Start (){
+        // get the distance to ground
+        pv = GetComponent<PhotonView>();
+        distToGround = GetComponent<Collider>().bounds.extents.y;
 	}
 	
 	bool IsGrounded (){
@@ -38,7 +43,8 @@ public class CharacterControls : MonoBehaviour {
 	}
 	
 	void Awake () {
-		rb = GetComponent<Rigidbody>();
+
+        rb = GetComponent<Rigidbody>();
 		rb.freezeRotation = true;
 		rb.useGravity = false;
 
@@ -47,6 +53,7 @@ public class CharacterControls : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
+		if (!pv.IsMine) return;
 		if (canMove)
 		{
 			if (moveDir.x != 0 || moveDir.z != 0)
@@ -124,11 +131,12 @@ public class CharacterControls : MonoBehaviour {
 
 	private void Update()
 	{
-		float h = Input.GetAxis("Horizontal");
+        if (!pv.IsMine) return;
+        float h = Input.GetAxis("Horizontal");
 		float v = Input.GetAxis("Vertical");
 
-		Vector3 v2 = v * cam.transform.forward; //Vertical axis to which I want to move with respect to the camera
-		Vector3 h2 = h * cam.transform.right; //Horizontal axis to which I want to move with respect to the camera
+		Vector3 v2 = v * _mainCamera.transform.forward; //Vertical axis to which I want to move with respect to the camera
+		Vector3 h2 = h * _mainCamera.transform.right; //Horizontal axis to which I want to move with respect to the camera
 		moveDir = (v2 + h2).normalized; //Global position to which I want to move in magnitude 1
 
 		RaycastHit hit;

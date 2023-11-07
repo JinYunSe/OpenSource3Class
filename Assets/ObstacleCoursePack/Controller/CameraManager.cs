@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
-
-	public float followSpeed = 3; //Speed ​​at which the camera follows us
+    
+	private PhotonView PV;
+    public float followSpeed = 3; //Speed ​​at which the camera follows us
 	public float mouseSpeed = 2; //Speed ​​at which we rotate the camera with the mouse
 	//public float controllerSpeed = 5; //Speed ​​at which we rotate the camera with the joystick
 	public float cameraDist = 3; //Distance to which the camera is located
@@ -26,10 +29,10 @@ public class CameraManager : MonoBehaviour {
 	float smoothYvelocity;
 	public float lookAngle; //Angle the camera has on the Y axis
 	public float tiltAngle; //Angle the camera has up / down
-
-	public void Init()
+	public GameObject Camera;
+    public void Init()
 	{
-		camTrans = Camera.main.transform;
+		camTrans = Camera.transform;
 		pivot = camTrans.parent;
 	}
 
