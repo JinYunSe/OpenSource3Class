@@ -35,11 +35,13 @@ public class CharacterControls : MonoBehaviour {
     void  Start (){
         // get the distance to ground
         pv = GetComponent<PhotonView>();
+		if (!pv.IsMine && PhotonNetwork.IsConnected == true) return;
         distToGround = GetComponent<Collider>().bounds.extents.y;
 	}
 	
 	bool IsGrounded (){
-		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+        Debug.Log("땅바닥 확인 : "+Physics.Raycast(transform.position, -Vector3.up, distToGround - 0.75f));
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround - 0.75f);
 	}
 	
 	void Awake () {

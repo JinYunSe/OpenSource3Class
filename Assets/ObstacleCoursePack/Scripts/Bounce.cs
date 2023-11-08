@@ -19,7 +19,7 @@ public class Bounce : MonoBehaviour
 			{
 				hitDir = contact.normal;
                 Debug.Log(PhotonNetwork.LocalPlayer.NickName + " : " + hitDir);
-                //collision.gameObject.GetComponent<ThirdPersonController>().HitPlayer(-hitDir * force);
+                collision.gameObject.GetComponent<CharacterControls>().HitPlayer(-hitDir * force, stunTime);
                 return;
 			}
 		}
