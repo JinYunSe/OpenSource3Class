@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson.PunDemos;
 
-public class Bounce : MonoBehaviour
+public class JinYunSeBounce : MonoBehaviour
 {
 	public float force = 10f; //Force 10000f
 	public float stunTime = 0.5f;

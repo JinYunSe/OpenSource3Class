@@ -6,7 +6,7 @@ using Photon.Pun;
 [RequireComponent (typeof (Rigidbody))]
 [RequireComponent (typeof (CapsuleCollider))]
 
-public class CharacterControls : MonoBehaviour {
+public class ThirdPersonCharacter : MonoBehaviour {
 	
 	public float speed = 10.0f;
 	public float airVelocity = 8f;

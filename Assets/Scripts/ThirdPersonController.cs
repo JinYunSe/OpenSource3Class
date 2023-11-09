@@ -119,7 +119,6 @@ namespace StarterAssets
         [SerializeField] private GameObject CameraRoot;
         private PhotonView pv;
         private CinemachineVirtualCamera virtualCamera;
-        public Rigidbody rigid;
 
         private bool IsCurrentDeviceMouse
         {
