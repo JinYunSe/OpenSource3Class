@@ -106,20 +106,20 @@ namespace StarterAssets
         private PlayerInput _playerInput;
 #endif
         private Animator _animator;
-        private CharacterController _controller;
+        public CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
-
+        
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
         private bool isMouseLeft = false;
         private bool isMouseDirection = false;
         private bool isJump = false;
-
         [SerializeField] private GameObject CameraRoot;
         private PhotonView pv;
         private CinemachineVirtualCamera virtualCamera;
+        public Rigidbody rigid;
 
         private bool IsCurrentDeviceMouse
         {
@@ -441,11 +441,6 @@ namespace StarterAssets
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
-        }
-
-        public void HitPlayer(Vector3 velocityF)
-        {
-            
         }
     }
 }

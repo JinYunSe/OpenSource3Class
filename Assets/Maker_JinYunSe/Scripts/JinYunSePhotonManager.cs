@@ -94,6 +94,6 @@ public class JinYunSePhotonManager : MonoBehaviourPunCallbacks
         int idx = Random.Range(1, points.Length);
 
         // 캐릭터 생성
-        PhotonNetwork.Instantiate("P01", points[idx].position, points[idx].rotation, 0);
+        PhotonNetwork.Instantiate("JinYunSeCharacter", points[idx].position, points[idx].rotation, 0);
     }
 }
