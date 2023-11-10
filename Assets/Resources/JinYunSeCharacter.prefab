@@ -3149,8 +3149,6 @@ MonoBehaviour:
   CameraAngleOverride: 0
   LockCameraPosition: 0
   CameraRoot: {fileID: 2697532080618970346}
-  LeftHand: {fileID: 1706329548350845004}
-  RightHand: {fileID: 6254467249624629093}
 --- !u!114 &894136830918335318
 MonoBehaviour:
   m_ObjectHideFlags: 0
