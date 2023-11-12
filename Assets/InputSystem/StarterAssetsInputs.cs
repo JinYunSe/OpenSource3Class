@@ -13,7 +13,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
         public bool mouseLeft;
-        public bool mouseRight;
+        //public bool mouseRight;
 
         [Header("Movement Settings")]
 		public bool analogMovement;
@@ -46,10 +46,10 @@ namespace StarterAssets
             MouseLeftInput(value.isPressed);
 		}
 
-        public void OnMouseRight(InputValue value)
+        /*public void OnMouseRight(InputValue value)
 		{
             MouseRightInput(value.isPressed);
-        }
+        }*/
 #endif
 
 
@@ -73,10 +73,10 @@ namespace StarterAssets
             mouseLeft = isMouseLeft;
         }
 
-        public void MouseRightInput(bool isMouseRight)
+        /*public void MouseRightInput(bool isMouseRight)
         {
             mouseRight = isMouseRight;
-        }
+        }*/
 
         private void OnApplicationFocus(bool hasFocus)
 		{
