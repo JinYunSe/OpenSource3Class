@@ -420,7 +420,23 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.84691846
+      - time: 0
+        functionName: OnHand
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9656202
+        functionName: OffHand
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: e7b84cf1c2d78004fafd603cf36bd8f1,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.98316526
         functionName: EndDirection
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -430,7 +446,8 @@ ModelImporter:
       - time: 1
         functionName: EndMouseLeft
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 11500000, guid: e7b84cf1c2d78004fafd603cf36bd8f1,
+          type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

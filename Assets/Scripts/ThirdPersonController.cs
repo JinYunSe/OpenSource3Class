@@ -119,6 +119,11 @@ namespace StarterAssets
         private PhotonView pv;
         private CinemachineVirtualCamera virtualCamera;
 
+        [SerializeField]
+        private SphereCollider RightHand;
+        [SerializeField]
+        private SphereCollider LeftHand;
+
         private bool IsCurrentDeviceMouse
         {
             get
@@ -168,6 +173,17 @@ namespace StarterAssets
             Move();
             MouseLeft();
             //MouseRight();
+        }
+
+        private void OnHand()
+        {
+            RightHand.enabled = true;
+            LeftHand.enabled = true;
+        }
+        private void OffHand()
+        {
+            RightHand.enabled = false;
+            LeftHand.enabled = false;
         }
 
         private void MouseLeft()

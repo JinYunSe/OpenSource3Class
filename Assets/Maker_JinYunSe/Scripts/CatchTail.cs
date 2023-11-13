@@ -6,11 +6,12 @@ using UnityEngine;
 
 public class CatchTail : MonoBehaviour
 {
-    public Transform topTrans;
+    private Transform topTrans;
     private void Start()
     {
         topTrans = transform.root;
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name.Equals("hand_l") || other.gameObject.name.Equals("hand_r")) return;
