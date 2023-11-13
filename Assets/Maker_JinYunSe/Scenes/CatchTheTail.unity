@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 215737085}
   - component: {fileID: 215737086}
   m_Layer: 0
-  m_Name: Point (2)
+  m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,14 +230,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215737084}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 32, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 743514621}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &215737086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,11 +247,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 215737084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 401eda887e40a41469db2a942c548982, type: 3}
+  m_Script: {fileID: 11500000, guid: fd238edd3a967cb438135c067dff8011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0, g: 1, b: 0, a: 1}
-  _radius: 0.3
+  color: {r: 0, g: 1, b: 0, a: 1}
+  radius: 0.5
 --- !u!1 &225595759
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 225595760}
   - component: {fileID: 225595761}
   m_Layer: 0
-  m_Name: Point (3)
+  m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,14 +276,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225595759}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 743514621}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &225595761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,11 +293,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 225595759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 401eda887e40a41469db2a942c548982, type: 3}
+  m_Script: {fileID: 11500000, guid: fd238edd3a967cb438135c067dff8011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _radius: 0.3
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  radius: 0.5
 --- !u!1 &243107467
 GameObject:
   m_ObjectHideFlags: 0
@@ -2200,11 +2200,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1334206560}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 401eda887e40a41469db2a942c548982, type: 3}
+  m_Script: {fileID: 11500000, guid: fd238edd3a967cb438135c067dff8011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 1, g: 0, b: 0, a: 1}
-  _radius: 0.3
+  color: {r: 1, g: 0, b: 0, a: 1}
+  radius: 0.5
 --- !u!1 &1355516067
 GameObject:
   m_ObjectHideFlags: 0
@@ -2641,7 +2641,7 @@ GameObject:
   - component: {fileID: 1795027459}
   - component: {fileID: 1795027460}
   m_Layer: 0
-  m_Name: Point (1)
+  m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2654,14 +2654,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795027458}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -32, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 743514621}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1795027460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2671,11 +2671,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1795027458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 401eda887e40a41469db2a942c548982, type: 3}
+  m_Script: {fileID: 11500000, guid: fd238edd3a967cb438135c067dff8011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0, g: 0, b: 1, a: 1}
-  _radius: 0.3
+  color: {r: 0, g: 0, b: 1, a: 1}
+  radius: 0.5
 --- !u!1 &1800252188
 GameObject:
   m_ObjectHideFlags: 0

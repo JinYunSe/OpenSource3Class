@@ -6,12 +6,10 @@ using UnityEngine;
 
 public class CatchTail : MonoBehaviour
 {
-    public GameObject Grapic;
-    public GameObject TailModel;
-    public GameObject Crown;
+    public Transform topTrans;
     private void Start()
     {
-        
+        topTrans = transform.root;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +17,7 @@ public class CatchTail : MonoBehaviour
         //다른 콜라이더와 충돌을 피하기 위해 생성
         if (other.CompareTag("Player") && other.gameObject.transform.Find("Tails").gameObject.activeSelf)
         {
+            Debug.Log("뺐긴 사람"+other.gameObject.GetPhotonView().Controller.NickName);
             //상대방 꼬리 그래픽 부분 비활성화
             other.transform.Find("Tails").gameObject.SetActive(false);
             //상대방 꼬리 콜라이더 정보가 있는 부분 비활성화
@@ -26,14 +25,15 @@ public class CatchTail : MonoBehaviour
 
             other.transform.Find("Headparts/Crown").gameObject.SetActive(false);
 
+            Debug.Log("뺐은 사람" + topTrans.gameObject.GetPhotonView().Controller.NickName);
             //꼬리 그래픽 부분 활성화
-            Grapic.SetActive(true);
+            topTrans.Find("Tails").gameObject.SetActive(true);
 
             //꼬리의 콜라이더 정보가 있는 부분 활성화
-            TailModel.SetActive(true);
-            
+            topTrans.Find("root/pelvis/Tail").gameObject.SetActive(true);
+
             //왕관 오브젝트 활성화
-            Crown.SetActive(true);
+            topTrans.Find("Headparts/Crown").gameObject.SetActive(true);
         }
     }
 }

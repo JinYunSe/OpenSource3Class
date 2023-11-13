@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6826147879668580124}
-  - component: {fileID: 8337744969437512498}
   - component: {fileID: 4535001696088465373}
   - component: {fileID: 1706329548350845004}
   m_Layer: 8
@@ -38,22 +37,6 @@ Transform:
   m_Father: {fileID: 7750975260415139235}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8337744969437512498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722965772922711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!114 &4535001696088465373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,9 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b84cf1c2d78004fafd603cf36bd8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Grapic: {fileID: 1417838770128671668}
-  TailModel: {fileID: 9115871112093503341}
-  Crown: {fileID: 37464362155561081}
+  topTrans: {fileID: 0}
 --- !u!135 &1706329548350845004
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -94,7 +75,6 @@ GameObject:
   - component: {fileID: 69836909118934147}
   - component: {fileID: 59439779700556115}
   - component: {fileID: 28273890221141949}
-  - component: {fileID: 5758881846579608496}
   m_Layer: 0
   m_Name: Crown
   m_TagString: Player
@@ -181,22 +161,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43220079165195186, guid: c0deea47781aa074aaec912bed8ce168, type: 2}
---- !u!114 &5758881846579608496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 37464362155561081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!1 &76787739275749577
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,7 +470,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3387407529307262990}
-  - component: {fileID: 8635386079409166603}
   - component: {fileID: 5664078536293822817}
   - component: {fileID: 6254467249624629093}
   m_Layer: 8
@@ -535,22 +498,6 @@ Transform:
   m_Father: {fileID: 2614050018399075439}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8635386079409166603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 576041051129216992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!114 &5664078536293822817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,9 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b84cf1c2d78004fafd603cf36bd8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Grapic: {fileID: 1417838770128671668}
-  TailModel: {fileID: 9115871112093503341}
-  Crown: {fileID: 37464362155561081}
+  topTrans: {fileID: 0}
 --- !u!135 &6254467249624629093
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -995,7 +940,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4005512889764992224}
-  - component: {fileID: 2832119311008459519}
   m_Layer: 8
   m_Name: Tails
   m_TagString: Player
@@ -1019,22 +963,6 @@ Transform:
   m_Father: {fileID: 8641352079731877841}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2832119311008459519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1417838770128671668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!1 &1701455518234303469
 GameObject:
   m_ObjectHideFlags: 0
@@ -3101,7 +3029,6 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   jump: 0
   mouseLeft: 0
-  mouseRight: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -3185,6 +3112,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 2
     Name: MouseRight
+  - Type: 4
+    SynchronizeType: 0
+    Name: Sliding
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
@@ -3225,11 +3155,11 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 894136830918335318}
   - {fileID: 1478242576054331032}
-  - {fileID: 2832119311008459519}
-  - {fileID: 5758881846579608496}
-  - {fileID: 3422447369689311626}
-  - {fileID: 8337744969437512498}
-  - {fileID: 8635386079409166603}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -3309,7 +3239,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7480650101580015113}
-  - component: {fileID: 3422447369689311626}
   m_Layer: 8
   m_Name: Tail
   m_TagString: Player
@@ -3333,19 +3262,3 @@ Transform:
   m_Father: {fileID: 7958187770243112072}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3422447369689311626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9115871112093503341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
