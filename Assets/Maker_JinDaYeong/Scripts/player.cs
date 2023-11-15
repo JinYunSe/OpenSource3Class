@@ -61,7 +61,6 @@ public class player : MonoBehaviour
         transform.position += moveVec * speed * (wDown ? 0.3f : 1f) * Time.smoothDeltaTime;
 
         anim.SetBool("isRun", moveVec != Vector3.zero);
-        anim.SetBool("isWalk", wDown);
     }
     void Turn()
     {
