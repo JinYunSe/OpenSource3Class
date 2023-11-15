@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UIElements;
+using Photon.Pun;
 public class player : MonoBehaviour
 {
     public float speed;
@@ -17,9 +18,11 @@ public class player : MonoBehaviour
     Rigidbody rigid;
 
     Animator anim;
-
+    private PhotonView pv;
     void Start()
     {
+        pv = GetComponent<PhotonView>();
+        if (!pv.IsMine) return;
         rigid = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
 
@@ -40,6 +43,7 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!pv.IsMine && PhotonNetwork.IsConnected) return;
         GetInput();
         Move();
         Turn();

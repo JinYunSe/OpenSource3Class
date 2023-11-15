@@ -231,6 +231,12 @@ namespace StarterAssets
 
         private void GroundedCheck()
         {
+            RaycastHit hit;
+            Debug.DrawRay(transform.position, transform.up * -0.01f,Color.red, 0.01f);
+            if (Physics.Raycast(transform.position, transform.up * -0.01f, out hit, 0.08f))
+            {
+                if (hit.collider.CompareTag("Floor")) hit.transform.GetComponent<TileController>().onUser();
+            }
             // set sphere position, with offset
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
                 transform.position.z);
