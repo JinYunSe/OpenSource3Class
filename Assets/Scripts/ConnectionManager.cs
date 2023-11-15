@@ -1,18 +1,27 @@
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class ConnectionManager : MonoBehaviourPunCallbacks
 {
     public Text IDtext;
     public Button connetBtn;
-    public GameObject nickNameCanvas;
-    public GameObject mainCanvas;
-    public GameObject createRoom;
-    public GameObject findRoom;
-    public Toggle secrectCheck;
-    public GameObject passWard;
+    public GameObject nickNameCanvas;   //닉네임 적기 캔버스
+
+    public GameObject mainCanvas;   //메인 캔버스
+
+    public GameObject createRoomCanvas; // 방 만들기 캔버스
+
+    public GameObject passWard; // 비밀번호 관련 칸 
+
+    public InputField roomName; // 방 이름 적는 칸
+    public Toggle secrectCheck; // 비밀방 체크 여부
+    public InputField inputPw;  // 비밀방 체크라면 비밀번호 입력 란
+
+    public GameObject findRoomCanvas; // 방 찾기 캔버스
     private void Start()
     {
         secrectCheck.onValueChanged.AddListener(
@@ -20,6 +29,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
             {
                 bool val = bOn; //누루는 이벤트 마다 값이 들어온다.
                 passWard.SetActive(val);
+                if (!val) inputPw.text = string.Empty;
             }
         );
     }
@@ -39,31 +49,51 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
         nickNameCanvas.SetActive(false);
         mainCanvas.SetActive(true);
     }
-    public void CreateRoom()
+
+    /// 각각의 캔버스 띄우는 구간
+    public void CreateRoomCanvas()
     {
         mainCanvas.SetActive(false);
-        createRoom.SetActive(true);
+        createRoomCanvas.SetActive(true);
     }
 
-    public void BackCreateRoom()
+    public void BackCreateRoomCanvas()
     {
         mainCanvas.SetActive(true);
-        createRoom.SetActive(false);
+        createRoomCanvas.SetActive(false);
+        secrectCheck.isOn = false;
+        passWard.SetActive(false);
+        roomName.text = string.Empty;
+        inputPw.text = string.Empty;
     }
 
-    public void FindRoot()
+    public void FindRoomCanvas()
     {
         mainCanvas.SetActive(false);
-        findRoom.SetActive(true);
+        findRoomCanvas.SetActive(true);
     }
-    public void BackFindRoot()
+    public void BackFindRoomCanvas()
     {
         mainCanvas.SetActive(true);
-        findRoom.SetActive(false);
+        findRoomCanvas.SetActive(false);
+    }
+    ///////////////////////////////////
+    
+    /// 방 만들기 및 방 만든 사람은 자동으로 방 참가
+    public void OnCreateRoom()
+    {
+        Debug.Log("방 만들기 실행");
+        RoomOptions ro = new RoomOptions();
+        ro.MaxPlayers = 4; //무료 접속은 20명 까지 가능이라 
+        ro.IsOpen = true; //룸을 열기
+        ro.IsVisible = true; //로비에서 공개 여부
+        PhotonNetwork.CreateRoom(roomName.text, ro);
     }
 
-    public void GameExit() 
+    /// 게임 종료 버튼 클릭 함수
+    public void GameExit()
     {
         Application.Quit();
     }
+
 }
