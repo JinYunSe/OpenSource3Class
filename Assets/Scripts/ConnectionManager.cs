@@ -11,6 +11,18 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     public GameObject mainCanvas;
     public GameObject createRoom;
     public GameObject findRoom;
+    public Toggle secrectCheck;
+    public GameObject passWard;
+    private void Start()
+    {
+        secrectCheck.onValueChanged.AddListener(
+            (bool bOn) =>
+            {
+                bool val = bOn; //누루는 이벤트 마다 값이 들어온다.
+                passWard.SetActive(val);
+            }
+        );
+    }
     public void Connect()
     {
         if (IDtext.text == string.Empty) return;
