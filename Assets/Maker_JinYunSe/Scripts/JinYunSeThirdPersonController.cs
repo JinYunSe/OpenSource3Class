@@ -1,4 +1,4 @@
-ï»¿using Cinemachine;
+using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
 using Photon.Realtime;
@@ -17,7 +17,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class ThirdPersonController : MonoBehaviour
+    public class JinYunSeThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -108,7 +108,7 @@ namespace StarterAssets
         private Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
-        
+
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
@@ -153,7 +153,7 @@ namespace StarterAssets
             pv = GetComponent<PhotonView>();
             virtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
 
-            // ìì‹ ì˜ ìºë¦­í„°ì¼ ê²½ìš° ì‹œë„¤ë¨¸ì‹  ì¹´ë©”ë¼ë¥¼ ì—°ê²°
+            // ÀÚ½ÅÀÇ Ä³¸¯ÅÍÀÏ °æ¿ì ½Ã³×¸Ó½Å Ä«¸Ş¶ó¸¦ ¿¬°á
             if (pv.IsMine)
             {
                 virtualCamera.Follow = CameraRoot.transform;

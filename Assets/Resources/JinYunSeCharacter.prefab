@@ -2923,7 +2923,7 @@ GameObject:
   - component: {fileID: 8099308950014213972}
   - component: {fileID: 8982411050056957295}
   - component: {fileID: 8982411050056957294}
-  - component: {fileID: 8982411050056957293}
+  - component: {fileID: 3352317417995509670}
   - component: {fileID: 894136830918335318}
   - component: {fileID: 1478242576054331032}
   - component: {fileID: 184362019269049462}
@@ -3030,7 +3030,7 @@ MonoBehaviour:
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
---- !u!114 &8982411050056957293
+--- !u!114 &3352317417995509670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3039,7 +3039,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8982411050056957291}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
+  m_Script: {fileID: 11500000, guid: e53a6ccb775c72f47b83c2a01306c845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 30
@@ -3057,7 +3057,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 67c8b33e424ccdc4486edf538ab91c5a, type: 3}
   - {fileID: 8300000, guid: 274649b0e221539409070ebf6c18918b, type: 3}
   - {fileID: 8300000, guid: a3194b8bbc96ef84fab1f98f4b7dae3e, type: 3}
-  FootstepAudioVolume: 1
+  FootstepAudioVolume: 0.5
   JumpHeight: 4
   Gravity: -9.8
   JumpTimeout: 0.5
@@ -3067,7 +3067,7 @@ MonoBehaviour:
   GroundedRadius: 0.28
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 512
   CinemachineCameraTarget: {fileID: 2697532080618970346}
   TopClamp: 70
   BottomClamp: -30

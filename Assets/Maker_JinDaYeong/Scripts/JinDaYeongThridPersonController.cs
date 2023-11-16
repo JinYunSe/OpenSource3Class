@@ -1,4 +1,4 @@
-Ôªøusing Cinemachine;
+using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
 using Photon.Realtime;
@@ -17,7 +17,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class ThirdPersonController : MonoBehaviour
+    public class JinDaYeongThridPersonController : MonoBehaviour
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -108,7 +108,7 @@ namespace StarterAssets
         private Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
-        
+
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
@@ -119,10 +119,6 @@ namespace StarterAssets
         private PhotonView pv;
         private CinemachineVirtualCamera virtualCamera;
 
-        [SerializeField]
-        private SphereCollider RightHand;
-        [SerializeField]
-        private SphereCollider LeftHand;
 
         private bool IsCurrentDeviceMouse
         {
@@ -153,7 +149,7 @@ namespace StarterAssets
             pv = GetComponent<PhotonView>();
             virtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
 
-            // ÏûêÏã†Ïùò Ï∫êÎ¶≠ÌÑ∞Ïùº Í≤ΩÏö∞ ÏãúÎÑ§Î®∏Ïã† Ïπ¥Î©îÎùºÎ•º Ïó∞Í≤∞
+            // ¿⁄Ω≈¿« ƒ≥∏Ø≈Õ¿œ ∞ÊøÏ Ω√≥◊∏”Ω≈ ƒ´∏ﬁ∂Û∏¶ ø¨∞·
             if (pv.IsMine)
             {
                 virtualCamera.Follow = CameraRoot.transform;
@@ -173,17 +169,6 @@ namespace StarterAssets
             Move();
             MouseLeft();
             //MouseRight();
-        }
-
-        private void OnHand()
-        {
-            RightHand.enabled = true;
-            LeftHand.enabled = true;
-        }
-        private void OffHand()
-        {
-            RightHand.enabled = false;
-            LeftHand.enabled = false;
         }
 
         private void MouseLeft()
@@ -231,6 +216,12 @@ namespace StarterAssets
 
         private void GroundedCheck()
         {
+            /*RaycastHit hit;
+            Debug.DrawRay(transform.position, transform.up * -0.01f, Color.red, 0.01f);
+            if (Physics.Raycast(transform.position, transform.up * -0.01f, out hit, 0.08f))
+            {
+                if (hit.collider.CompareTag("Floor")) hit.transform.GetComponent<TileController>().onUser();
+            }*/
             // set sphere position, with offset
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
                 transform.position.z);
