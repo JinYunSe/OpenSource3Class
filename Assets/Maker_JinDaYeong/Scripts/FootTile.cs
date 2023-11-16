@@ -16,7 +16,7 @@ public class FootTile : MonoBehaviour
         if (other.CompareTag("Player")) return;
         if (other.CompareTag("Floor"))
         {
-            other.GetComponent<TileController>().onUser();
+            other.GetComponent<TileController>().OnTheFloor();
         }
     }
 }

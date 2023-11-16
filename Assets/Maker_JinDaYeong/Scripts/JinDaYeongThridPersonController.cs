@@ -167,11 +167,11 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-            MouseLeft();
+            //MouseLeft();
             //MouseRight();
         }
 
-        private void MouseLeft()
+        /*private void MouseLeft()
         {
             if (_hasAnimator && Grounded && !isJump && _input.mouseLeft && !isMouseLeft)
             {
@@ -191,7 +191,7 @@ namespace StarterAssets
         private void EndDirection()
         {
             isMouseDirection = false;
-        }
+        }*/
 
         /*private void MouseRight()
         {

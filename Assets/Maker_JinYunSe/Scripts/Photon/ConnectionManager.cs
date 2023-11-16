@@ -45,11 +45,23 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
                 return;
             }
         }
-        PhotonNetwork.LocalPlayer.NickName = IDtext.text;
+        Debug.Log("Connecting to Server");
+        MasterManager.GameSettings.NickName = IDtext.text;
+        PhotonNetwork.NickName = MasterManager.GameSettings.NickName;
+        PhotonNetwork.ConnectUsingSettings();
         nickNameCanvas.SetActive(false);
         mainCanvas.SetActive(true);
     }
-
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("Connted to Server");
+        Debug.Log(PhotonNetwork.LocalPlayer.NickName);
+    }
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.Log("Disconnected from Server for reason : " + cause.ToString());
+        //DisconnectCause.
+    }
     /// 각각의 캔버스 띄우는 구간
     public void CreateRoomCanvas()
     {
