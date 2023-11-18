@@ -1,4 +1,3 @@
-using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,18 +9,17 @@ public class GameSettings : ScriptableObject
     private string _gameVersion = "0.0.0";
     public string GameVersion
     {
-        get
-        {
-            return _gameVersion;
-        }
+        get { return _gameVersion; }
     }
-    private string _nickName;
+    [SerializeField]
+    private string _nickName = "PunTest";
     public string NickName
     {
-        set { _nickName = value; }
         get
         {
-            return _nickName;
+            int value = Random.Range(0, 9999);
+            return _nickName + value.ToString();
         }
     }
+
 }

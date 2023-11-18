@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a0e1229b17677c4a89ae862e86c35cd, type: 3}
-  m_Name: New Game Settings
+  m_Script: {fileID: 11500000, guid: ddcecf73aa0a4af4f81dcc1c0816b604, type: 3}
+  m_Name: GameSettings
   m_EditorClassIdentifier: 
   _gameVersion: 0.0.0
-  _nickName: 
+  _nickName: PunTest
