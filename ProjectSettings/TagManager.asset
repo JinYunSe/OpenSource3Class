@@ -7,6 +7,12 @@ TagManager:
   - CinemachineTarget
   - Tail
   - Hand
+  - Floor
+  - Bullet
+  - Wall
+  - JumpZone
+  - SlowZone
+  - G-Reverse
   layers:
   - Default
   - TransparentFX
