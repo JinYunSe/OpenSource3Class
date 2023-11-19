@@ -28,8 +28,8 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
     {
         string temp = _roomName.text;
         temp = Regex.Replace(temp, @"[^a-zA-Z]", string.Empty);
-        if (temp.Equals(string.Empty)) return;
         _roomNameInputField.text = string.Empty;
+        if (temp.Equals(string.Empty)) return;
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 4; //무료 접속은 4명 까지 가능이라
         PhotonNetwork.JoinOrCreateRoom(temp, roomOptions, TypedLobby.Default);
