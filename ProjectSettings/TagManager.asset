@@ -13,11 +13,14 @@ TagManager:
   - JumpZone
   - SlowZone
   - G-Reverse
+  - FxTemporaire
+  - TrueTarget
+  - FalseTarget
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Target
   - Water
   - UI
   - 
