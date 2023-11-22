@@ -13,6 +13,8 @@ TagManager:
   - JumpZone
   - SlowZone
   - G-Reverse
+  - FxTemporaire
+  - ScoreLine
   layers:
   - Default
   - TransparentFX
