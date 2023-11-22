@@ -7,7 +7,7 @@ public class move : MonoBehaviour
     private Rigidbody playerRB;
     public float speed = 10.0f; //속도
     public float gravity = 9.8f; //중력
-    Ray ray = new Ray();
+    public Ray ray = new Ray();
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();

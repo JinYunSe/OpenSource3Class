@@ -14,12 +14,14 @@ TagManager:
   - SlowZone
   - G-Reverse
   - FxTemporaire
+  - TrueTarget
+  - FalseTarget
   - ScoreLine
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Target
   - Water
   - UI
   - 
