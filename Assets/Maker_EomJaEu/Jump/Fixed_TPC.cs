@@ -88,6 +88,10 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+        private bool _reversegravity = false;
+        private int _isground = 0;
+        private float _move_x = 0;
+        private float _move_y = 0;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -108,6 +112,7 @@ namespace StarterAssets
         private Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
+        private GroundCheck _GroundCheck;
         
         private const float _threshold = 0.01f;
 
@@ -144,6 +149,7 @@ namespace StarterAssets
             _input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
             _playerInput = GetComponent<PlayerInput>();
+            _GroundCheck = GetComponent<GroundCheck>();
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
@@ -168,7 +174,14 @@ namespace StarterAssets
         {
             if (!pv.IsMine || isMouseDirection) return;
             _hasAnimator = TryGetComponent(out _animator);
-            JumpAndGravity();
+            if (_reversegravity)
+            {
+                ReverseGravity();
+            }
+            else
+            {
+                JumpAndGravity();
+            }
             GroundedCheck();
             Move();
             MouseLeft();
@@ -235,8 +248,25 @@ namespace StarterAssets
             //Vector3 capsulePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
             //Grounded = Physics.CheckCapsule(capsulePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,transform.position.z);
-            Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
-
+            Grounded = _GroundCheck.checkGround();
+            _move_y = 0f;
+                //Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+            _isground = _GroundCheck.IsGrounded();
+            if(_isground == 1)
+            {
+                _verticalVelocity = 35f;
+                _move_y = 50f;
+                _isground = 0;
+            }
+            else if(_isground == 2)
+            {
+                _move_y = -2f;
+                _isground = 0;
+            }
+            else
+            {
+                _move_y = 0f;
+            }
             // update animator if using character
             if (_hasAnimator)
             {
@@ -325,7 +355,8 @@ namespace StarterAssets
 
             // move the player
             _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime +
+                             new Vector3(_move_x, 0.0f, _move_y) * Time.deltaTime);
 
             // update animator if using character
             if (_hasAnimator)
@@ -404,6 +435,62 @@ namespace StarterAssets
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
             }
+            //Debug.Log("정상중력" + _verticalVelocity);
+        }
+
+        private void ReverseGravity()
+        {
+            _jumpTimeoutDelta = JumpTimeout;
+
+            // fall timeout
+            if (_fallTimeoutDelta >= 0.0f)
+            {
+                _fallTimeoutDelta -= Time.deltaTime;
+            }
+            else
+            {
+                // update animator if using character
+                if (_hasAnimator)
+                {
+                    _animator.SetBool(_animIDFreeFall, true);
+                }
+            }
+
+            // if we are not grounded, do not jump
+            _input.jump = false;
+
+            if (_verticalVelocity < _terminalVelocity)
+            {
+                _verticalVelocity += 3.0f;// * Time.deltaTime;
+            }
+            //_verticalVelocity = 18f;
+            //Debug.Log("반대 중력" + _verticalVelocity);
+        }
+
+        public void set_normalgravity()
+        {
+            _fallTimeoutDelta = FallTimeout;
+
+            if (_verticalVelocity < 0.0f)
+            {
+                _verticalVelocity = -2f;
+            }
+            if (_jumpTimeoutDelta >= 0.0f)
+            {
+                _jumpTimeoutDelta -= Time.deltaTime;
+            }
+
+            _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+
+            _reversegravity = false;
+
+            //Debug.Log("중력 복구" + _verticalVelocity);
+        }
+
+        public void set_reversegravity()
+        {
+            _reversegravity = true;
+            //Debug.Log("역중력" + _verticalVelocity);
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)

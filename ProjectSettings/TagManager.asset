@@ -16,6 +16,7 @@ TagManager:
   - FxTemporaire
   - TrueTarget
   - FalseTarget
+  - ScoreLine
   layers:
   - Default
   - TransparentFX
