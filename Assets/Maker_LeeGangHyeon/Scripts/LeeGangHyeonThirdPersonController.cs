@@ -20,6 +20,9 @@ namespace StarterAssets
         private GunAssetsInputs _input;
         private Gun gun;
         private PhotonView pv;
+        [SerializeField]
+        private SphereCollider sphereCollider;
+
         private bool IsCurrentDeviceMouse
         {
             get
@@ -57,11 +60,13 @@ namespace StarterAssets
             if (_input.mouseLeft)
             {
                 gun.Shoot();
+                sphereCollider.enabled = true;
             }
         }
         public void EndMouseLeft()
         {
-            _input.mouseLeft = false; gameObject.SetActive(true);
+            _input.mouseLeft = false;
+            sphereCollider.enabled = false;
         }
 
         private void Move()
