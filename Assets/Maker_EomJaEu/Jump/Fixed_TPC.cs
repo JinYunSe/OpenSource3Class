@@ -173,7 +173,6 @@ namespace StarterAssets
         private void Update()
         {
             if (!pv.IsMine || isMouseDirection) return;
-            _hasAnimator = TryGetComponent(out _animator);
             if (_reversegravity)
             {
                 ReverseGravity();

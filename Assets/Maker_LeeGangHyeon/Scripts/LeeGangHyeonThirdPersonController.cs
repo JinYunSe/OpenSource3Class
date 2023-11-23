@@ -22,7 +22,12 @@ namespace StarterAssets
         private PhotonView pv;
         [SerializeField]
         private SphereCollider sphereCollider;
+        private bool _hasAnimator;
+        private Animator _animator;
+        private bool isMouseLeft = false;
 
+        private int _animIDRifleAim;
+        private int _animIDRifleFire;
         private bool IsCurrentDeviceMouse
         {
             get
@@ -37,12 +42,14 @@ namespace StarterAssets
 
         private void Start()
         {
+            _hasAnimator = TryGetComponent(out _animator);
             _input = GetComponent<GunAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
             _playerInput = GetComponent<PlayerInput>();
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
+            AssignAnimationIDs();
             pv = GetComponent<PhotonView>();
             gun = transform.Find("MARMO3").GetComponent<Gun>();
             if (!pv.IsMine) return;
@@ -57,16 +64,30 @@ namespace StarterAssets
 
         public void MouseLeft()
         {
-            if (_input.mouseLeft)
+            if (_hasAnimator &&_input.mouseLeft && !isMouseLeft)
             {
                 gun.Shoot();
-                sphereCollider.enabled = true;
+                _animator.SetTrigger(_animIDRifleFire);
+                isMouseLeft = true;
             }
+        }
+        private void OnCollider()
+        {
+            sphereCollider.enabled = true;
+        }
+        private void OffCollider()
+        {
+            sphereCollider.enabled = false;
         }
         public void EndMouseLeft()
         {
+            isMouseLeft = false;
             _input.mouseLeft = false;
-            sphereCollider.enabled = false;
+        }
+
+        private void AssignAnimationIDs()
+        {
+            _animIDRifleFire = Animator.StringToHash("RifleFire");
         }
 
         private void Move()

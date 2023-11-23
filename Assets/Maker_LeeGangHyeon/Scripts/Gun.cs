@@ -28,14 +28,6 @@ public class Gun : MonoBehaviour {
     public void Shoot()
     {
         audioSource.Play();
-
-        /*RaycastHit hitinfo;
-        if (Physics.Raycast(RayPosition.position, RayPosition.transform.right, out hitinfo, -7))
-        {
-            Debug.Log("확인 : "+ hitinfo.collider.gameObject.name);
-        }*/
-        controller.EndMouseLeft();
-        //Debug.Log("확인");
     }
 
     private void OnTriggerEnter(Collider other)

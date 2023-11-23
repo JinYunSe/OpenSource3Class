@@ -1982,7 +1982,7 @@ GameObject:
   - component: {fileID: 5900648905553256925}
   - component: {fileID: 3443639560505286860}
   - component: {fileID: 4163430944192018978}
-  - component: {fileID: 446578844185712773}
+  - component: {fileID: 6836337401891207694}
   - component: {fileID: 5900648905553256915}
   m_Layer: 8
   m_Name: LeeGangHyeonCharacter
@@ -2114,6 +2114,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 4163430944192018978}
+  - {fileID: 6836337401891207694}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -2133,7 +2134,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &446578844185712773
+--- !u!114 &6836337401891207694
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2142,20 +2143,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 5900648905553256913}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 4163430944192018978}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 2
+    Name: RifleFire
+  m_SynchronizeLayers:
+  - SynchronizeType: 2
+    LayerIndex: 0
 --- !u!143 &5900648905553256915
 CharacterController:
   m_ObjectHideFlags: 0
