@@ -1,6 +1,7 @@
 ﻿using ExitGames.Client.Photon;
 using Photon.Realtime;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,9 +22,6 @@ namespace Photon.Pun.Demo.Asteroids
 
         public InputField RoomNameInputField;
         public InputField MaxPlayersInputField;
-
-        [Header("Join Random Room Panel")]
-        public GameObject JoinRandomRoomPanel;
 
         [Header("Room List Panel")]
         public GameObject RoomListPanel;
@@ -219,22 +217,17 @@ namespace Photon.Pun.Demo.Asteroids
         public void OnCreateRoomButtonClicked()
         {
             string roomName = RoomNameInputField.text;
-            roomName = (roomName.Equals(string.Empty)) ? "Room " + Random.Range(1000, 10000) : roomName;
-
-            byte maxPlayers;
-            byte.TryParse(MaxPlayersInputField.text, out maxPlayers);
-            maxPlayers = (byte) Mathf.Clamp(maxPlayers, 2, 8);
-
+            roomName = Regex.Replace(roomName, @"[^0-9a-zA-Z._]", string.Empty);
+            RoomNameInputField.text = string.Empty;
+            string temp_maxPlayer = MaxPlayersInputField.text;
+            MaxPlayersInputField.text = string.Empty;
+            Regex regex = new Regex("[^2-4]");
+            bool checkText = regex.IsMatch(temp_maxPlayer);
+            if (roomName.Equals(string.Empty) || checkText) return;
+            int maxPlayers = int.Parse(temp_maxPlayer);
             RoomOptions options = new RoomOptions {MaxPlayers = maxPlayers, PlayerTtl = 10000 };
 
             PhotonNetwork.CreateRoom(roomName, options, null);
-        }
-
-        public void OnJoinRandomRoomButtonClicked()
-        {
-            SetActivePanel(JoinRandomRoomPanel.name);
-
-            PhotonNetwork.JoinRandomRoom();
         }
 
         public void OnLeaveGameButtonClicked()
@@ -273,6 +266,7 @@ namespace Photon.Pun.Demo.Asteroids
             PhotonNetwork.CurrentRoom.IsVisible = false;
 
             PhotonNetwork.LoadLevel("DemoAsteroids-GameScene");
+            //게임 시작 화면
         }
 
         #endregion
@@ -318,12 +312,11 @@ namespace Photon.Pun.Demo.Asteroids
             StartGameButton.gameObject.SetActive(CheckPlayersReady());
         }
 
-        private void SetActivePanel(string activePanel)
+        public void SetActivePanel(string activePanel)
         {
             LoginPanel.SetActive(activePanel.Equals(LoginPanel.name));
             SelectionPanel.SetActive(activePanel.Equals(SelectionPanel.name));
             CreateRoomPanel.SetActive(activePanel.Equals(CreateRoomPanel.name));
-            JoinRandomRoomPanel.SetActive(activePanel.Equals(JoinRandomRoomPanel.name));
             RoomListPanel.SetActive(activePanel.Equals(RoomListPanel.name));    // UI should call OnRoomListButtonClicked() to activate this
             InsideRoomPanel.SetActive(activePanel.Equals(InsideRoomPanel.name));
         }
@@ -367,6 +360,11 @@ namespace Photon.Pun.Demo.Asteroids
 
                 roomListEntries.Add(info.Name, entry);
             }
+        }
+
+        public void OnExitClick()
+        {
+            Application.Quit();
         }
     }
 }
