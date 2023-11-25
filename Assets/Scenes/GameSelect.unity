@@ -472,9 +472,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1929181377}
+      - m_Target: {fileID: 1929181376}
         m_TargetAssemblyTypeName: ConnectionManager, Assembly-CSharp
-        m_MethodName: Connect
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1157,8 +1157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fde80b3cb0e4d2418c06d12a71e7205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IDtext: {fileID: 886917950}
-  connetBtn: {fileID: 297069405}
 --- !u!4 &1929181378
 Transform:
   m_ObjectHideFlags: 0
