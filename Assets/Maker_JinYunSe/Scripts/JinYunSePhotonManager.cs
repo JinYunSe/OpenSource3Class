@@ -8,11 +8,10 @@ using Cinemachine;
 public class JinYunSePhotonManager : MonoBehaviourPunCallbacks
 {
     //버전 입력
-    private readonly string version = "1.0f";
     [Header("리스폰 장소 그룹")]
     [SerializeField] private GameObject SpawnPointGroup;
-
-    private void Awake()
+    int idx = 1;
+    /*private void Awake()
     {
         Debug.Log("유저 NickName : " + PhotonNetwork.NickName);
         // 같은 룸의 유저들에게 자동으로 씬을 로딩
@@ -95,5 +94,25 @@ public class JinYunSePhotonManager : MonoBehaviourPunCallbacks
 
         // 캐릭터 생성
         PhotonNetwork.Instantiate("JinYunSeCharacter", points[idx].position, points[idx].rotation, 0);
+    }*/
+    void Start()
+    {
+        MyGizmo[] points = SpawnPointGroup.GetComponentsInChildren<MyGizmo>();
+        StartCoroutine(SpwanPlayer());
+    }
+
+    public IEnumerator SpwanPlayer()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        Debug.Log("인원 확인 : " + PhotonNetwork.CurrentRoom.PlayerCount);
+        MyGizmo[] points = SpawnPointGroup.GetComponentsInChildren<MyGizmo>();
+        while (true)
+        {
+            idx = Random.Range(0, points.Length);
+            Debug.Log("index 진행 상황: " + idx + ", " + points[idx].check + ", isAlive :" + points[idx].gameObject);
+            if (points[idx].check && points[idx].gameObject != null) break;
+        }
+        points[idx].AlreadyUsed();
+        PhotonNetwork.Instantiate("JinYunSeCharacter", points[idx].transform.position, points[idx].transform.rotation, 0);
     }
 }

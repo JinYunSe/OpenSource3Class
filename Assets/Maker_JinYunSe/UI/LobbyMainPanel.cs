@@ -44,10 +44,9 @@ namespace Photon.Pun.Demo.Asteroids
         public void Awake()
         {
             PhotonNetwork.AutomaticallySyncScene = true;
-
             cachedRoomList = new Dictionary<string, RoomInfo>();
             roomListEntries = new Dictionary<string, GameObject>();
-            
+
             PlayerNameInput.text = "Player " + Random.Range(1000, 10000);
         }
 
@@ -96,7 +95,7 @@ namespace Photon.Pun.Demo.Asteroids
         {
             string roomName = "Room " + Random.Range(1000, 10000);
 
-            RoomOptions options = new RoomOptions {MaxPlayers = 8};
+            RoomOptions options = new RoomOptions { MaxPlayers = 8 };
 
             PhotonNetwork.CreateRoom(roomName, options, null);
         }
@@ -124,7 +123,7 @@ namespace Photon.Pun.Demo.Asteroids
                 object isPlayerReady;
                 if (p.CustomProperties.TryGetValue(AsteroidsGame.PLAYER_READY, out isPlayerReady))
                 {
-                    entry.GetComponent<PlayerListEntry>().SetPlayerReady((bool) isPlayerReady);
+                    entry.GetComponent<PlayerListEntry>().SetPlayerReady((bool)isPlayerReady);
                 }
 
                 playerListEntries.Add(p.ActorNumber, entry);
@@ -193,7 +192,7 @@ namespace Photon.Pun.Demo.Asteroids
                 object isPlayerReady;
                 if (changedProps.TryGetValue(AsteroidsGame.PLAYER_READY, out isPlayerReady))
                 {
-                    entry.GetComponent<PlayerListEntry>().SetPlayerReady((bool) isPlayerReady);
+                    entry.GetComponent<PlayerListEntry>().SetPlayerReady((bool)isPlayerReady);
                 }
             }
 
@@ -225,7 +224,7 @@ namespace Photon.Pun.Demo.Asteroids
             bool checkText = regex.IsMatch(temp_maxPlayer);
             if (roomName.Equals(string.Empty) || checkText) return;
             int maxPlayers = int.Parse(temp_maxPlayer);
-            RoomOptions options = new RoomOptions {MaxPlayers = maxPlayers, PlayerTtl = 10000 };
+            RoomOptions options = new RoomOptions { MaxPlayers = maxPlayers, PlayerTtl = 10000 };
 
             PhotonNetwork.CreateRoom(roomName, options, null);
         }
@@ -262,10 +261,11 @@ namespace Photon.Pun.Demo.Asteroids
 
         public void OnStartGameButtonClicked()
         {
+            //if (PhotonNetwork.CurrentRoom.PlayerCount == 1) return;
             PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.CurrentRoom.IsVisible = false;
-
-            PhotonNetwork.LoadLevel("DemoAsteroids-GameScene");
+            PhotonNetwork.AutomaticallySyncScene = true;
+            PhotonNetwork.LoadLevel("CatchTheTail");
             //게임 시작 화면
         }
 
@@ -283,7 +283,7 @@ namespace Photon.Pun.Demo.Asteroids
                 object isPlayerReady;
                 if (p.CustomProperties.TryGetValue(AsteroidsGame.PLAYER_READY, out isPlayerReady))
                 {
-                    if (!(bool) isPlayerReady)
+                    if (!(bool)isPlayerReady)
                     {
                         return false;
                     }
@@ -296,7 +296,7 @@ namespace Photon.Pun.Demo.Asteroids
 
             return true;
         }
-        
+
         private void ClearRoomListView()
         {
             foreach (GameObject entry in roomListEntries.Values)

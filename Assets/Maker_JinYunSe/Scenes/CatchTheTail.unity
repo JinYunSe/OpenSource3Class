@@ -451,8 +451,7 @@ GameObject:
   - component: {fileID: 337908987}
   - component: {fileID: 337908986}
   - component: {fileID: 337908985}
-  - component: {fileID: 337908988}
-  - component: {fileID: 337908982}
+  - component: {fileID: 337908990}
   - component: {fileID: 337908989}
   m_Layer: 0
   m_Name: MovableObs
@@ -461,20 +460,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &337908982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 337908981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdffcc51f538bef4c8abd3b5bbb6ff17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 10
-  stunTime: 0.3
 --- !u!23 &337908985
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -540,22 +525,6 @@ Transform:
   m_Father: {fileID: 647243316}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &337908988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 337908981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c3abf4569b4814cb40e2d7bc0a5783, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 10
-  horizontal: 1
-  speed: 5
-  offset: 0
 --- !u!64 &337908989
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -570,6 +539,22 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: ca0d9867e97d2244283ab110bb8b8c13, type: 2}
+--- !u!114 &337908990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337908981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db86cc4ec8dcafa40b0beac5c291999f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 10
+  horizontal: 1
+  speed: 5
+  offset: 0
 --- !u!1 &370068395
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,7 +976,6 @@ GameObject:
   - component: {fileID: 780406606}
   - component: {fileID: 780406605}
   - component: {fileID: 780406608}
-  - component: {fileID: 780406602}
   - component: {fileID: 780406609}
   m_Layer: 0
   m_Name: MovableObs
@@ -1000,20 +984,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &780406602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 780406601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdffcc51f538bef4c8abd3b5bbb6ff17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 10
-  stunTime: 0.3
 --- !u!23 &780406605
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1757,8 +1727,7 @@ GameObject:
   - component: {fileID: 1104490015}
   - component: {fileID: 1104490014}
   - component: {fileID: 1104490013}
-  - component: {fileID: 1104490016}
-  - component: {fileID: 1104490010}
+  - component: {fileID: 1104490018}
   - component: {fileID: 1104490017}
   m_Layer: 0
   m_Name: MovableObs
@@ -1767,20 +1736,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1104490010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1104490009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdffcc51f538bef4c8abd3b5bbb6ff17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 10
-  stunTime: 0.3
 --- !u!23 &1104490013
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1846,22 +1801,6 @@ Transform:
   m_Father: {fileID: 647243316}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1104490016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1104490009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c3abf4569b4814cb40e2d7bc0a5783, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 10
-  horizontal: 0
-  speed: 5
-  offset: 0
 --- !u!64 &1104490017
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1876,6 +1815,22 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: b2eabf527620ba0449be3b07307482da, type: 2}
+--- !u!114 &1104490018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104490009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db86cc4ec8dcafa40b0beac5c291999f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 10
+  horizontal: 0
+  speed: 5
+  offset: 0
 --- !u!1 &1138173012
 GameObject:
   m_ObjectHideFlags: 0
@@ -9926,7 +9881,6 @@ GameObject:
   - component: {fileID: 8994021905497974214}
   - component: {fileID: 8994021905497974209}
   - component: {fileID: 8994021905497974216}
-  - component: {fileID: 8994021905497974212}
   - component: {fileID: 8994021905497974217}
   m_Layer: 0
   m_Name: MovableObs
@@ -9935,20 +9889,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8994021905497974212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8994021905497974210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdffcc51f538bef4c8abd3b5bbb6ff17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 10
-  stunTime: 0.3
 --- !u!33 &8994021905497974214
 MeshFilter:
   m_ObjectHideFlags: 0
