@@ -1,6 +1,7 @@
 ﻿using ExitGames.Client.Photon;
 using Photon.Realtime;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +22,8 @@ namespace Photon.Pun.Demo.Asteroids
         public GameObject CreateRoomPanel;
 
         public InputField RoomNameInputField;
-        public InputField MaxPlayersInputField;
+        public Text MaxPlayerSelect;
+        public Text GameSelect;
 
         [Header("Room List Panel")]
         public GameObject RoomListPanel;
@@ -34,6 +36,8 @@ namespace Photon.Pun.Demo.Asteroids
 
         public Button StartGameButton;
         public GameObject PlayerListEntryPrefab;
+
+
 
         private Dictionary<string, RoomInfo> cachedRoomList;
         private Dictionary<string, GameObject> roomListEntries;
@@ -89,15 +93,6 @@ namespace Photon.Pun.Demo.Asteroids
         public override void OnJoinRoomFailed(short returnCode, string message)
         {
             SetActivePanel(SelectionPanel.name);
-        }
-
-        public override void OnJoinRandomFailed(short returnCode, string message)
-        {
-            string roomName = "Room " + Random.Range(1000, 10000);
-
-            RoomOptions options = new RoomOptions { MaxPlayers = 8 };
-
-            PhotonNetwork.CreateRoom(roomName, options, null);
         }
 
         public override void OnJoinedRoom()
@@ -218,14 +213,11 @@ namespace Photon.Pun.Demo.Asteroids
             string roomName = RoomNameInputField.text;
             roomName = Regex.Replace(roomName, @"[^0-9a-zA-Z._]", string.Empty);
             RoomNameInputField.text = string.Empty;
-            string temp_maxPlayer = MaxPlayersInputField.text;
-            MaxPlayersInputField.text = string.Empty;
-            Regex regex = new Regex("[^2-4]");
-            bool checkText = regex.IsMatch(temp_maxPlayer);
-            if (roomName.Equals(string.Empty) || checkText) return;
-            int maxPlayers = int.Parse(temp_maxPlayer);
-            RoomOptions options = new RoomOptions { MaxPlayers = maxPlayers, PlayerTtl = 10000 };
-
+            if (roomName.Equals(string.Empty)) return;
+            int maxPlayers = int.Parse(MaxPlayerSelect.text);
+            Debug.Log("maxPlayers : " + maxPlayers);
+            RoomOptions options = new RoomOptions { MaxPlayers = maxPlayers, PlayerTtl = 1 };
+            roomName += ("\n"+GameSelect.text);
             PhotonNetwork.CreateRoom(roomName, options, null);
         }
 
@@ -261,12 +253,11 @@ namespace Photon.Pun.Demo.Asteroids
 
         public void OnStartGameButtonClicked()
         {
-            //if (PhotonNetwork.CurrentRoom.PlayerCount == 1) return;
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 1) return;
             PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.CurrentRoom.IsVisible = false;
             PhotonNetwork.AutomaticallySyncScene = true;
-            PhotonNetwork.LoadLevel("CatchTheTail");
-            //게임 시작 화면
+            PhotonNetwork.LoadLevel(GameSelect.text);
         }
 
         #endregion
@@ -356,7 +347,7 @@ namespace Photon.Pun.Demo.Asteroids
                 GameObject entry = Instantiate(RoomListEntryPrefab);
                 entry.transform.SetParent(RoomListContent.transform);
                 entry.transform.localScale = Vector3.one;
-                entry.GetComponent<RoomListEntry>().Initialize(info.Name, (byte)info.PlayerCount, (byte)info.MaxPlayers);
+                entry.GetComponent<RoomListEntry>().Initialize(info.Name.Split("\n")[0], info.Name.Split('\n')[1],(byte)info.PlayerCount, (byte)info.MaxPlayers);
 
                 roomListEntries.Add(info.Name, entry);
             }

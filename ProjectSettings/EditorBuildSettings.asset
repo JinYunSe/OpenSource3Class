@@ -6,21 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Maker_JinYunSe/Scenes/UITest.unity
+    path: Assets/Maker_JinYunSe/Scenes/UI.unity
     guid: e0739a96419bfe5419e66e0898cf137f
   - enabled: 1
     path: Assets/Maker_JinYunSe/Scenes/CatchTheTail.unity
     guid: 84876aff2a955b443a014933afa90b6e
-  - enabled: 0
+  - enabled: 1
     path: Assets/Maker_JinDaYeong/Scens/FallingFloor.unity
     guid: 639062694d055104b9bcb9c1b66ce63d
-  - enabled: 0
-    path: Assets/Scenes/LoadingScene.unity
-    guid: b6ff02323ea055a42b18223a39f7abc9
-  - enabled: 0
-    path: Assets/Maker_LeeGangHyeon/Scenes/swiftshooter.unity
+  - enabled: 1
+    path: Assets/Maker_LeeGangHyeon/Scenes/SwiftShooter.unity
     guid: 4305ebe482cfbef41b62d4dcb788c7d9
-  - enabled: 0
+  - enabled: 1
     path: Assets/Maker_EomJaEu/Jump/Jump.unity
     guid: cc69cac31b9fa9841ae6994e0790bec8
   m_configObjects:
