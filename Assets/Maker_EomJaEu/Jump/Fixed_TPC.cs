@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Realtime;
 using Unity.VisualScripting;
 using System.Collections;
+using UnityEngine.UI;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -129,6 +130,7 @@ namespace StarterAssets
         [SerializeField]
         private SphereCollider LeftHand;
 
+        public Text nickNameUI;
         private bool IsCurrentDeviceMouse
         {
             get
@@ -158,12 +160,17 @@ namespace StarterAssets
 
             pv = GetComponent<PhotonView>();
             virtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
-
+            nickNameUI.text = pv.Owner.NickName;
             // 자신의 캐릭터일 경우 시네머신 카메라를 연결
             if (pv.IsMine)
             {
+                nickNameUI.gameObject.SetActive(false);
                 virtualCamera.Follow = CameraRoot.transform;
                 virtualCamera.LookAt = CameraRoot.transform;
+            }
+            else
+            {
+                nickNameUI.gameObject.SetActive(true);
             }
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
