@@ -3,11 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GetPoint : MonoBehaviour
 {
     Stopwatch watch = new Stopwatch();
-    float time = 0;
+    public Text TimerText;
+    private float time = 0;
+    private PhotonView PV;
+    private void Awake()
+    {
+        PV = transform.root.GetComponent<PhotonView>();
+        if (PV.IsMine)
+        {
+            TimerText.gameObject.transform.parent.gameObject.SetActive(true);
+        }
+        else
+        {
+            TimerText.gameObject.transform.parent.gameObject.SetActive(false);
+        }
+    }
     void OnEnable()
     {
         watch.Start();
@@ -21,7 +36,18 @@ public class GetPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time = (float)watch.Elapsed.TotalSeconds;
-        UnityEngine.Debug.Log(transform.root.gameObject.GetPhotonView().Controller.NickName+" , "+time);
+        if (PV.IsMine)
+        {
+            TimerText.gameObject.transform.parent.gameObject.SetActive(true);
+            time = (float)watch.Elapsed.TotalSeconds;
+            TimerText.text = "GetTime : " + Mathf.Floor(time).ToString();
+            UnityEngine.Debug.Log(transform.root.gameObject.GetPhotonView().Controller.NickName + " , " + time);
+        }
+        else
+        {
+            TimerText.gameObject.transform.parent.gameObject.SetActive(false);
+            time = (float)watch.Elapsed.TotalSeconds;
+            TimerText.text = "GetTime : " + Mathf.Floor(time).ToString();
+        }
     }
 }
