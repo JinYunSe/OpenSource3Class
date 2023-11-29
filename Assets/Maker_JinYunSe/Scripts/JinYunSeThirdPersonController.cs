@@ -152,7 +152,6 @@ namespace StarterAssets
 
             pv = GetComponent<PhotonView>();
             virtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
-
             // 자신의 캐릭터일 경우 시네머신 카메라를 연결
             if (pv.IsMine)
             {

@@ -8,13 +8,6 @@ public class MyGizmo : MonoBehaviour
 {
     public Color color = Color.yellow;
     public float radius = 0.1f;
-    public bool check = true;
-
-    internal void AlreadyUsed()
-    {
-        check = false;
-        PhotonNetwork.Destroy(gameObject);
-    }
 
     // Start is called before the first frame update
     void OnDrawGizmos()
