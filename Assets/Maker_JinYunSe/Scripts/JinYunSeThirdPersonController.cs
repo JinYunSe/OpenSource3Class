@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Realtime;
 using Unity.VisualScripting;
 using System.Collections;
+using UnityEngine.UI;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -123,7 +124,6 @@ namespace StarterAssets
         private SphereCollider RightHand;
         [SerializeField]
         private SphereCollider LeftHand;
-
         private bool IsCurrentDeviceMouse
         {
             get

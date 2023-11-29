@@ -253,7 +253,8 @@ namespace Photon.Pun.Demo.Asteroids
 
         public void OnStartGameButtonClicked()
         {
-            if (PhotonNetwork.CurrentRoom.PlayerCount == 1) return;
+            //Test를 위해서 잠시 주석 처리 향후 지우기
+            //if (PhotonNetwork.CurrentRoom.PlayerCount == 1) return;
             PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.CurrentRoom.IsVisible = false;
             PhotonNetwork.AutomaticallySyncScene = true;
