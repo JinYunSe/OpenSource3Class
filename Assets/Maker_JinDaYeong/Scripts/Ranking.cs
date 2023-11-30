@@ -18,7 +18,7 @@ public class Ranking : MonoBehaviour, IPunObservable
 
     private IEnumerator InitializePlayerScores()
     {
-        yield return new WaitForSecondsRealtime(5f); 
+        yield return null; 
 
         Debug.Log(PhotonNetwork.CurrentRoom.Players.Count+"Έν");
 
@@ -52,7 +52,15 @@ public class Ranking : MonoBehaviour, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.IsWriting) stream.SendNext(playerScores);
-        else playerScores = (Dictionary<string,int>)stream.ReceiveNext();
+        if (stream.IsWriting)
+        {
+            stream.SendNext(playerScores);
+            stream.SendNext(count);
+        }
+        else
+        {
+            playerScores = (Dictionary<string, int>)stream.ReceiveNext();
+            count = (int)stream.ReceiveNext();
+        }
     }
 }

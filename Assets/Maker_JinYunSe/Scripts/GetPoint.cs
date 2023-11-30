@@ -38,14 +38,14 @@ public class GetPoint : MonoBehaviour
             TimerText.gameObject.transform.parent.gameObject.SetActive(true);
             time = (float)watch.Elapsed.TotalSeconds;
             TimerText.text = "GetTime : " + Mathf.Floor(time).ToString();
-            UnityEngine.Debug.Log(transform.root.gameObject.GetPhotonView().Controller.NickName + " , " + time);
+            //UnityEngine.Debug.Log(transform.root.gameObject.GetPhotonView().Controller.NickName + " , " + time);
         }
         else
         {
             TimerText.gameObject.transform.parent.gameObject.SetActive(false);
             time = (float)watch.Elapsed.TotalSeconds;
             TimerText.text = "GetTime : " + Mathf.Floor(time).ToString();
-            UnityEngine.Debug.Log(transform.root.gameObject.GetPhotonView().Controller.NickName + " , " + time);
+            //UnityEngine.Debug.Log(transform.root.gameObject.GetPhotonView().Controller.NickName + " , " + time);
         }
     }
 }
