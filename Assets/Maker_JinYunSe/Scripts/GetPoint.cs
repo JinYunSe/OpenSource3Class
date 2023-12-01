@@ -14,10 +14,7 @@ public class GetPoint : MonoBehaviour
     private void Start()
     {
         PV = transform.root.GetComponent<PhotonView>();
-        if (PV.IsMine)
-        {
-            TimerText.gameObject.SetActive(true);
-        }
+        if (PV.IsMine) TimerText.gameObject.SetActive(true);
     }
 
     void OnEnable()
@@ -35,17 +32,14 @@ public class GetPoint : MonoBehaviour
     {
         if (PV.IsMine)
         {
-            TimerText.gameObject.transform.parent.gameObject.SetActive(true);
             time = (float)watch.Elapsed.TotalSeconds;
             TimerText.text = "GetTime : " + Mathf.Floor(time).ToString();
             //UnityEngine.Debug.Log(transform.root.gameObject.GetPhotonView().Controller.NickName + " , " + time);
         }
-        else
+        else 
         {
-            TimerText.gameObject.transform.parent.gameObject.SetActive(false);
             time = (float)watch.Elapsed.TotalSeconds;
             TimerText.text = "GetTime : " + Mathf.Floor(time).ToString();
-            //UnityEngine.Debug.Log(transform.root.gameObject.GetPhotonView().Controller.NickName + " , " + time);
         }
     }
 }

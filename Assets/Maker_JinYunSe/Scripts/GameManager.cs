@@ -1,6 +1,7 @@
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -30,7 +31,6 @@ public class GameManager : MonoBehaviour
         {
             return time;
         }
-
         public void SetRanking()
         {
             ranking++;
@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
     }
 
     List<Ranking> Rankings;
+    GameObject[] player;
+    PhotonView[] photonView;
     void Start()
     {
         StartCoroutine(TimeOutEndGame());
@@ -49,23 +51,44 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator TimeOutEndGame()
     {
-        yield return new WaitForSecondsRealtime(20);
-        GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log("player count: "+player.Length);
+        yield return new WaitForSecondsRealtime(60);
+        player = GameObject.FindGameObjectsWithTag("Player");
+        photonView = new PhotonView[player.Length];
         Rankings = new List<Ranking>();
-        for (int i  = 0; i < player.Length; i++)
-        {
-            name =  player[i].GetPhotonView().Controller.NickName;
-            string timetemp = player[i].transform.Find("StaticUI/TimerText").GetComponent<Text>().text;
-            int time = int.Parse(Regex.Replace(timetemp, @"\D", string.Empty));
-            Rankings.Add(new Ranking(name, time));
-        }
         for (int i = 0; i < player.Length; i++)
         {
-            Debug.Log("Nick : " + Rankings[i].GetNickName() + ", time : " + Rankings[i].GetTime() + ", Ranking : " + Rankings[i].GetRanking());
+            photonView[i] = player[i].GetPhotonView();
+            string nickName = photonView[i].Controller.NickName;
+            string timetemp = player[i].transform.Find("StaticUI/TimerText").GetComponent<Text>().text;
+            int time = int.Parse(Regex.Replace(timetemp, @"\D", string.Empty));
+            Rankings.Add(new Ranking(nickName, time));
         }
+        Rank();
     }
     public void Rank()
     {
+        for (int i = 0; i < Rankings.Count; i++)
+        {
+            for (int j = i + 1; j < Rankings.Count; j++)
+            {
+                if (Rankings[i].GetTime() > Rankings[j].GetTime())
+                {
+                    Rankings[j].SetRanking();
+                }
+            }
+        }
+        RankView();
+    }
+
+    private void RankView()
+    {
+        for (int i = 0; i < player.Length; i++)
+        {
+            Transform endGamePanel = player[i].transform.Find("EndGameCanvas/EndGameUI");
+            endGamePanel.Find("TimeText").GetComponent<Text>().text = "Time : " + Rankings[i].GetTime();
+            endGamePanel.Find("RankingText").GetComponent<Text>().text = "Ranking : " + Rankings[i].GetRanking();
+            if (photonView[i].IsMine) endGamePanel.parent.gameObject.SetActive(true);
+            Debug.Log("Nick Name : " + photonView[i].Controller.NickName + " Time : " + Rankings[i].GetTime() + " Rank : " + Rankings[i].GetRanking());
+        }
     }
 }
