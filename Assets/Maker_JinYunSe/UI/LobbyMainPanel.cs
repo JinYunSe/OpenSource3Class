@@ -1,11 +1,9 @@
 ﻿using ExitGames.Client.Photon;
 using Photon.Realtime;
 using System.Collections.Generic;
-using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace Photon.Pun.Demo.Asteroids
 {
     public class LobbyMainPanel : MonoBehaviourPunCallbacks
@@ -47,11 +45,30 @@ namespace Photon.Pun.Demo.Asteroids
 
         public void Awake()
         {
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            if(PhotonNetwork.IsConnected )
+            {
+                StartCoroutine(ReConnection());
+            }
             PhotonNetwork.AutomaticallySyncScene = true;
             cachedRoomList = new Dictionary<string, RoomInfo>();
             roomListEntries = new Dictionary<string, GameObject>();
 
             PlayerNameInput.text = "Player " + Random.Range(1000, 10000);
+        }
+
+        System.Collections.IEnumerator ReConnection()
+        {
+            yield return new WaitForSeconds(0.01f);
+            PhotonNetwork.LeaveLobby();
+            yield return new WaitForSeconds(0.02f);
+            PhotonNetwork.Disconnect();
+            yield return new WaitForSeconds(0.03f);
+            LoginPanel.SetActive(true);
+            SelectionPanel.SetActive(false);
         }
 
         #endregion
