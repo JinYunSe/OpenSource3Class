@@ -92,6 +92,7 @@ namespace StarterAssets
         private int _isground = 0;
         private float _move_x = 0;
         private float _move_y = 0;
+        public bool _respawn = false;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -181,6 +182,7 @@ namespace StarterAssets
             {
                 JumpAndGravity();
             }
+            
             GroundedCheck();
             Move();
             MouseLeft();
@@ -363,6 +365,11 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
+        }
+
+        private void teleport()
+        {
+
         }
 
         private void JumpAndGravity()

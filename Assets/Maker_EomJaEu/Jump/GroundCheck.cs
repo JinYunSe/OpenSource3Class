@@ -52,6 +52,10 @@ public class GroundCheck : MonoBehaviour
         {
             return 2;
         }
+        else if(checker && hit.collider.CompareTag("OutofGround"))
+        {
+            return 3;
+        }
         return 0;
     }
 
@@ -61,17 +65,14 @@ public class GroundCheck : MonoBehaviour
         return checker;
     }
 
-    public int CheckTrigger(int mode)
+    public int CheckTrigger()
     {
         bool checker = Physics.BoxCast(transform.position, boxSize / 2.0f, -transform.up, out RaycastHit hit, transform.rotation, maxDistance, groundLayer);
         if (hit.collider.isTrigger)
         {
-            if (checker && mode == 3)
+            if (hit.collider.CompareTag("ScoreLine"))
             {
-                return 1;
-            }
-            else if (hit.collider.CompareTag("ScoreLine"))
-            {
+                //Debug.Log("충돌");
                 return 2;
             }
         }
@@ -98,6 +99,7 @@ public class GroundCheck : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        Fixed_TPC Fixed_TPC = GetComponent<Fixed_TPC>();
         if (other.CompareTag("ScoreLine"))
         {
             Debug.Log("점수 추가");

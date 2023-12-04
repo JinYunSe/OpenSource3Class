@@ -6,9 +6,9 @@ namespace Photon.Pun.Demo.Asteroids
     public class RoomListEntry : MonoBehaviour
     {
         public Text RoomNameText;
+        public Text GameNameText;
         public Text RoomPlayersText;
         public Button JoinRoomButton;
-
         private string roomName;
 
         public void Start()
@@ -19,16 +19,16 @@ namespace Photon.Pun.Demo.Asteroids
                 {
                     PhotonNetwork.LeaveLobby();
                 }
-
+                Debug.Log("roomName : " + roomName);
                 PhotonNetwork.JoinRoom(roomName);
             });
         }
 
-        public void Initialize(string name, byte currentPlayers, byte maxPlayers)
+        public void Initialize(string RoomName,string GameName,byte currentPlayers, byte maxPlayers)
         {
-            roomName = name;
-
-            RoomNameText.text = name;
+            roomName = RoomName+"\n"+GameName;
+            RoomNameText.text = RoomName;
+            GameNameText.text = GameName;
             RoomPlayersText.text = currentPlayers + " / " + maxPlayers;
         }
     }
