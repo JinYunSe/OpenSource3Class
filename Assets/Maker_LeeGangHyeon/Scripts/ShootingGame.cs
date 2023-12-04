@@ -1,40 +1,34 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ShootingGame : MonoBehaviour
 {
-    // TrueTarget ¹× FalseTargetÀÇ ÇÁ¸®ÆÕÀ» Unity Inspector¿¡¼­ ¼³Á¤ÇÏ±â À§ÇÑ º¯¼öµé
+    // Unity ì—ë””í„°ì—ì„œ í• ë‹¹í•  íƒ€ê²Ÿ í”„ë¦¬íŒ¹ë“¤
     public GameObject TrueTarget;
     public GameObject FalseTarget;
 
-    // °ÔÀÓÀÌ ÁøÇàµÇ´Â ½Ã°£ ¹× Å¸ÀÌ¸Ó
-    private float gameTime = 60f;
-    private float timer = 0f;
+    // ê²Œì„ ê´€ë ¨ ë³€ìˆ˜
+    private float gameTime = 60f; // ê²Œì„ ì´ ì§€ì† ì‹œê°„ (ì´ˆ)
+    private float timer = 0f; // ê²½ê³¼ ì‹œê°„ì„ ì¶”ì í•˜ëŠ” íƒ€ì´ë¨¸
+    private bool gameIsRunning = true; // ê²Œì„ì´ ì§„í–‰ ì¤‘ì¸ì§€ ì—¬ë¶€ë¥¼ ë‚˜íƒ€ë‚´ëŠ” í”Œë˜ê·¸
 
-    // °ÔÀÓÀÌ ÁøÇà ÁßÀÎÁö ¿©ºÎ¸¦ ³ªÅ¸³»´Â ÇÃ·¡±×
-    private bool gameIsRunning = true;
-
-    // °ú³áÀÌ ³ªÅ¸³¯ °íÁ¤ À§Ä¡µé
-    private Vector3[] spawnPositions = {
-        new Vector3(-9.72f, -0.56f, 19f),
-        new Vector3(-11.02f, -0.56f, 19f),
-        new Vector3(-8.42f, -0.56f, 19f)
-    };
+    // ë‹¤ì–‘í•œ ê·¸ë£¹ì— ëŒ€í•œ ìŠ¤í° ìœ„ì¹˜ë¥¼ ì €ì¥í•  ë°°ì—´
+    private List<Vector3>[] spawnPositionGroups;
+    private List<Vector3> usedSpawnPositions = new List<Vector3>(); // ì‚¬ìš©ëœ ìŠ¤í° ìœ„ì¹˜ë¥¼ ì¶”ì í•˜ëŠ” ë¦¬ìŠ¤íŠ¸
 
     void Start()
     {
-        // ÀÏÁ¤ °£°İÀ¸·Î SpawnTargets ÇÔ¼ö È£Ãâ ½ÃÀÛ
+        // ìŠ¤í° ìœ„ì¹˜ ê·¸ë£¹ ì´ˆê¸°í™” ë° ì¼ì •í•œ ë”œë ˆì´ì™€ ë°˜ë³µ ê°„ê²©ìœ¼ë¡œ íƒ€ê²Ÿì„ ìŠ¤í° ì‹œì‘
+        InitializeSpawnPositionGroups();
         InvokeRepeating("SpawnTargets", 2f, 3f);
     }
 
     void Update()
     {
-        // °ÔÀÓÀÌ ÁøÇà ÁßÀÏ ¶§
+        // ê²Œì„ì´ ì§„í–‰ ì¤‘ì¼ ë•Œ íƒ€ì´ë¨¸ ì—…ë°ì´íŠ¸ ë° ê²Œì„ ì§€ì† ì‹œê°„ í™•ì¸
         if (gameIsRunning)
         {
-            // °æ°ú ½Ã°£ ÃøÁ¤
             timer += Time.deltaTime;
-
-            // ÁöÁ¤µÈ °ÔÀÓ ½Ã°£ÀÌ °æ°úÇÏ¸é °ÔÀÓ Á¾·á
             if (timer >= gameTime)
             {
                 EndGame();
@@ -42,32 +36,62 @@ public class ShootingGame : MonoBehaviour
         }
     }
 
+    void InitializeSpawnPositionGroups()
+    {
+        // ì„¸ ê°€ì§€ ê·¸ë£¹ì— ëŒ€í•œ ìŠ¤í° ìœ„ì¹˜ ë°°ì—´ ì´ˆê¸°í™”
+        spawnPositionGroups = new List<Vector3>[3];
+
+        // ê° ê·¸ë£¹ì— ëŒ€í•œ ìŠ¤í° ìœ„ì¹˜ ì •ì˜
+        spawnPositionGroups[0] = new List<Vector3>
+        {
+            new Vector3(-10.43f, -1f, 19f),
+            new Vector3(-4.37f, -1f, 19f),
+            new Vector3(2.33f, -1f, 19f),
+            new Vector3(9.15f, -1f, 19f),
+        };
+
+        spawnPositionGroups[1] = new List<Vector3>
+        {
+            new Vector3(-8.7f, -1f, 19f),
+            new Vector3(-2.65f, -1f, 19f),
+            new Vector3(3.94f, -1f, 19f),
+            new Vector3(10.72f, -1f, 19f),
+        };
+
+        spawnPositionGroups[2] = new List<Vector3>
+        {
+            new Vector3(-7.12f, -1f, 19f),
+            new Vector3(-1.14f, -1f, 19f),
+            new Vector3(5.45f, -1f, 19f),
+            new Vector3(12.29f, -1f, 19f),
+        };
+    }
+
     void SpawnTargets()
     {
-        // 1ºÎÅÍ 3±îÁö ·£´ıÇÑ °³¼öÀÇ °ú³á »ı¼º
-        int targetCount = Random.Range(1, 4);
-
-        // »ı¼ºµÈ °¢ °ú³á¿¡ ´ëÇØ ¹İº¹
-        for (int i = 0; i < targetCount; i++)
+        // ê° ìŠ¤í° ìœ„ì¹˜ ê·¸ë£¹ì— ëŒ€í•´ ë°˜ë³µ
+        foreach (var group in spawnPositionGroups)
         {
-            // 3°³ÀÇ ÀÚ¸® Áß¿¡¼­ ·£´ıÇÏ°Ô ¼±ÅÃ
-            int spawnPointIndex = Random.Range(0, spawnPositions.Length);
-            Vector3 spawnPosition = spawnPositions[spawnPointIndex];
+                // íƒ€ê²Ÿì´ TrueTargetì¸ì§€ FalseTargetì¸ì§€ ëœë¤ìœ¼ë¡œ ê²°ì •
+                bool isTrueTarget = Random.Range(0, 2) == 0;
 
-            // ·£´ıÇÏ°Ô TrueTarget ¶Ç´Â FalseTarget »ı¼º
-            GameObject target = Instantiate(Random.Range(0, 2) == 0 ? TrueTarget : FalseTarget, spawnPosition, Quaternion.identity);
+                // í˜„ì¬ ê·¸ë£¹ì˜ ê° ìŠ¤í° ìœ„ì¹˜ì— ëŒ€í•´ ë°˜ë³µ
+                foreach (var spawnPosition in group)
+                {
+                    // ìŠ¤í° ìœ„ì¹˜ì—ì„œ íƒ€ê²Ÿì„ ìƒì„±í•˜ê³  íšŒì „ ì„¤ì •
+                    GameObject target = Instantiate(isTrueTarget ? TrueTarget : FalseTarget, spawnPosition, Quaternion.identity);
+                    target.transform.rotation = Quaternion.Euler(90f, 0f, -180f);
 
-            // »ı¼ºµÈ °ú³á¿¡ ´ëÇÑ ¼³Á¤ (»ö»ó, ½ºÅ©¸³Æ® µî)À» Ãß°¡ÇÒ ¼ö ÀÖÀ½
-
-            // ÀÏÁ¤ ½Ã°£ÀÌ Áö³­ ÈÄ¿¡ »ı¼ºµÈ °ú³á ÆÄ±«
-            Destroy(target, 2f);
+                // 2ì´ˆ í›„ì— ìƒì„±ëœ íƒ€ê²Ÿ íŒŒê´´
+                Destroy(target, 2f);
+            }
         }
     }
 
     void EndGame()
     {
-        // °ÔÀÓ Á¾·á ÇÃ·¡±× ¼³Á¤ ¹× ¸Ş½ÃÁö Ãâ·Â
+        // ê²Œì„ ì¢…ë£Œ ë° ë©”ì‹œì§€ ë¡œê·¸
         gameIsRunning = false;
-        Debug.Log("Game Over!");
+        Debug.Log("ê²Œì„ ì¢…ë£Œ!");
     }
 }
