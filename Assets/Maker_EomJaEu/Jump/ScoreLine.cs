@@ -37,8 +37,7 @@ public class ScoreLine : MonoBehaviour
         }
         else if (other.gameObject.name == "UnderGround")
         {
-            transform.position = other.transform.position;
-                //new Vector3(Respawn.transform.position.x, Respawn.transform.position.y + 10, Respawn.transform.position.z); ;
+            Respawn_code();
             Debug.Log("ÅÚÆ÷");
         }
             return 0;
@@ -47,7 +46,9 @@ public class ScoreLine : MonoBehaviour
     public void Respawn_code()
     {
         Fixed_TPC fixed_TPC = new Fixed_TPC();
-
+        fixed_TPC = GetComponent<Fixed_TPC>();
+        fixed_TPC.enabled = false;
+        transform.position = new Vector3(Respawn.transform.position.x, Respawn.transform.position.y, Respawn.transform.position.z);
     }
 
     private void OnTriggerEnter(Collider other)

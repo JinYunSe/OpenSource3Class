@@ -182,7 +182,6 @@ namespace StarterAssets
             {
                 JumpAndGravity();
             }
-            
             GroundedCheck();
             Move();
             MouseLeft();
