@@ -1696,7 +1696,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.9202153
+      - time: 0.04084468
         functionName: OffCollider
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 96cbea7975e23e842b015fef21f2f960,
