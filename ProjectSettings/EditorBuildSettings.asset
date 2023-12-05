@@ -14,8 +14,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Maker_JinDaYeong/Scens/FallingFloor.unity
     guid: 639062694d055104b9bcb9c1b66ce63d
-  - enabled: 0
-    path: Assets/Maker_LeeGangHyeon/Scenes/swiftshooter.unity
+  - enabled: 1
+    path: Assets/Maker_LeeGangHyeon/Scenes/SwiftShooter.unity
     guid: 4305ebe482cfbef41b62d4dcb788c7d9
   - enabled: 0
     path: Assets/Maker_EomJaEu/Jump/Jump.unity
