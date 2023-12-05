@@ -14,6 +14,6 @@ public class EndGameScripts : MonoBehaviour
     IEnumerator OutGame()
     {
         yield return new WaitForSecondsRealtime(5);
-        PhotonNetwork.LoadLevel("UI");
+        if(PhotonNetwork.IsMasterClient) PhotonNetwork.LoadLevel("UI");
     }
 }

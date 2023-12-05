@@ -23,7 +23,6 @@ public class Ranking : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("≈∏∞Ÿ ªÁ∏¡ »Æ¿Œ");
         Transform endPanel = other.transform.Find("EndGameCanvas/EndGameUI");
         if (playercount == 1) endPanel.Find("WinLoseText").GetComponent<Text>().text = "You Win!!";
         else endPanel.Find("WinLoseText").GetComponent<Text>().text = "You Lose...";
