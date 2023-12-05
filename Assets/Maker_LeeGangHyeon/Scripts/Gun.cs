@@ -36,6 +36,10 @@ public class Gun : MonoBehaviour {
         {
             Destroy(other.gameObject);
         }
+        else if (other.CompareTag("FalseTarget"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
 

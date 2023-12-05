@@ -3,29 +3,29 @@ using System.Collections.Generic;
 
 public class ShootingGame : MonoBehaviour
 {
-    // Unity ì—ë””í„°ì—ì„œ í• ë‹¹í•  íƒ€ê²Ÿ í”„ë¦¬íŒ¹ë“¤
+    // Unity ¿¡µğÅÍ¿¡¼­ ÇÒ´çÇÒ Å¸°Ù ÇÁ¸®ÆÕµé
     public GameObject TrueTarget;
     public GameObject FalseTarget;
 
-    // ê²Œì„ ê´€ë ¨ ë³€ìˆ˜
-    private float gameTime = 60f; // ê²Œì„ ì´ ì§€ì† ì‹œê°„ (ì´ˆ)
-    private float timer = 0f; // ê²½ê³¼ ì‹œê°„ì„ ì¶”ì í•˜ëŠ” íƒ€ì´ë¨¸
-    private bool gameIsRunning = true; // ê²Œì„ì´ ì§„í–‰ ì¤‘ì¸ì§€ ì—¬ë¶€ë¥¼ ë‚˜íƒ€ë‚´ëŠ” í”Œë˜ê·¸
+    // °ÔÀÓ °ü·Ã º¯¼ö
+    private float gameTime = 60f; // °ÔÀÓ ÃÑ Áö¼Ó ½Ã°£ (ÃÊ)
+    private float timer = 0f; // °æ°ú ½Ã°£À» ÃßÀûÇÏ´Â Å¸ÀÌ¸Ó
+    private bool gameIsRunning = true; // °ÔÀÓÀÌ ÁøÇà ÁßÀÎÁö ¿©ºÎ¸¦ ³ªÅ¸³»´Â ÇÃ·¡±×
 
-    // ë‹¤ì–‘í•œ ê·¸ë£¹ì— ëŒ€í•œ ìŠ¤í° ìœ„ì¹˜ë¥¼ ì €ì¥í•  ë°°ì—´
+    // ´Ù¾çÇÑ ±×·ì¿¡ ´ëÇÑ ½ºÆù À§Ä¡¸¦ ÀúÀåÇÒ ¹è¿­
     private List<Vector3>[] spawnPositionGroups;
-    private List<Vector3> usedSpawnPositions = new List<Vector3>(); // ì‚¬ìš©ëœ ìŠ¤í° ìœ„ì¹˜ë¥¼ ì¶”ì í•˜ëŠ” ë¦¬ìŠ¤íŠ¸
+    private List<Vector3> usedSpawnPositions = new List<Vector3>(); // »ç¿ëµÈ ½ºÆù À§Ä¡¸¦ ÃßÀûÇÏ´Â ¸®½ºÆ®
 
     void Start()
     {
-        // ìŠ¤í° ìœ„ì¹˜ ê·¸ë£¹ ì´ˆê¸°í™” ë° ì¼ì •í•œ ë”œë ˆì´ì™€ ë°˜ë³µ ê°„ê²©ìœ¼ë¡œ íƒ€ê²Ÿì„ ìŠ¤í° ì‹œì‘
+        // ½ºÆù À§Ä¡ ±×·ì ÃÊ±âÈ­ ¹× ÀÏÁ¤ÇÑ µô·¹ÀÌ¿Í ¹İº¹ °£°İÀ¸·Î Å¸°ÙÀ» ½ºÆù ½ÃÀÛ
         InitializeSpawnPositionGroups();
         InvokeRepeating("SpawnTargets", 2f, 3f);
     }
 
     void Update()
     {
-        // ê²Œì„ì´ ì§„í–‰ ì¤‘ì¼ ë•Œ íƒ€ì´ë¨¸ ì—…ë°ì´íŠ¸ ë° ê²Œì„ ì§€ì† ì‹œê°„ í™•ì¸
+        // °ÔÀÓÀÌ ÁøÇà ÁßÀÏ ¶§ Å¸ÀÌ¸Ó ¾÷µ¥ÀÌÆ® ¹× °ÔÀÓ Áö¼Ó ½Ã°£ È®ÀÎ
         if (gameIsRunning)
         {
             timer += Time.deltaTime;
@@ -38,10 +38,10 @@ public class ShootingGame : MonoBehaviour
 
     void InitializeSpawnPositionGroups()
     {
-        // ì„¸ ê°€ì§€ ê·¸ë£¹ì— ëŒ€í•œ ìŠ¤í° ìœ„ì¹˜ ë°°ì—´ ì´ˆê¸°í™”
+        // ¼¼ °¡Áö ±×·ì¿¡ ´ëÇÑ ½ºÆù À§Ä¡ ¹è¿­ ÃÊ±âÈ­
         spawnPositionGroups = new List<Vector3>[3];
 
-        // ê° ê·¸ë£¹ì— ëŒ€í•œ ìŠ¤í° ìœ„ì¹˜ ì •ì˜
+        // °¢ ±×·ì¿¡ ´ëÇÑ ½ºÆù À§Ä¡ Á¤ÀÇ
         spawnPositionGroups[0] = new List<Vector3>
         {
             new Vector3(-10.43f, -1f, 19f),
@@ -69,20 +69,20 @@ public class ShootingGame : MonoBehaviour
 
     void SpawnTargets()
     {
-        // ê° ìŠ¤í° ìœ„ì¹˜ ê·¸ë£¹ì— ëŒ€í•´ ë°˜ë³µ
+        // °¢ ½ºÆù À§Ä¡ ±×·ì¿¡ ´ëÇØ ¹İº¹
         foreach (var group in spawnPositionGroups)
         {
-                // íƒ€ê²Ÿì´ TrueTargetì¸ì§€ FalseTargetì¸ì§€ ëœë¤ìœ¼ë¡œ ê²°ì •
+                // Å¸°ÙÀÌ TrueTargetÀÎÁö FalseTargetÀÎÁö ·£´ıÀ¸·Î °áÁ¤
                 bool isTrueTarget = Random.Range(0, 2) == 0;
 
-                // í˜„ì¬ ê·¸ë£¹ì˜ ê° ìŠ¤í° ìœ„ì¹˜ì— ëŒ€í•´ ë°˜ë³µ
+                // ÇöÀç ±×·ìÀÇ °¢ ½ºÆù À§Ä¡¿¡ ´ëÇØ ¹İº¹
                 foreach (var spawnPosition in group)
                 {
-                    // ìŠ¤í° ìœ„ì¹˜ì—ì„œ íƒ€ê²Ÿì„ ìƒì„±í•˜ê³  íšŒì „ ì„¤ì •
+                    // ½ºÆù À§Ä¡¿¡¼­ Å¸°ÙÀ» »ı¼ºÇÏ°í È¸Àü ¼³Á¤
                     GameObject target = Instantiate(isTrueTarget ? TrueTarget : FalseTarget, spawnPosition, Quaternion.identity);
                     target.transform.rotation = Quaternion.Euler(90f, 0f, -180f);
 
-                // 2ì´ˆ í›„ì— ìƒì„±ëœ íƒ€ê²Ÿ íŒŒê´´
+                // 2ÃÊ ÈÄ¿¡ »ı¼ºµÈ Å¸°Ù ÆÄ±«
                 Destroy(target, 2f);
             }
         }
@@ -90,8 +90,8 @@ public class ShootingGame : MonoBehaviour
 
     void EndGame()
     {
-        // ê²Œì„ ì¢…ë£Œ ë° ë©”ì‹œì§€ ë¡œê·¸
+        // °ÔÀÓ Á¾·á ¹× ¸Ş½ÃÁö ·Î±×
         gameIsRunning = false;
-        Debug.Log("ê²Œì„ ì¢…ë£Œ!");
+        Debug.Log("°ÔÀÓ Á¾·á!");
     }
 }

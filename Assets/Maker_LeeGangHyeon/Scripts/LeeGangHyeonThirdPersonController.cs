@@ -6,8 +6,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
-
 namespace StarterAssets
 {
     [RequireComponent(typeof(CharacterController))]
@@ -30,9 +28,6 @@ namespace StarterAssets
 
         private int _animIDRifleAim;
         private int _animIDRifleFire;
-
-        public Text nickNameUI;
-
         private bool IsCurrentDeviceMouse
         {
             get
@@ -56,8 +51,8 @@ namespace StarterAssets
 #endif
             AssignAnimationIDs();
             pv = GetComponent<PhotonView>();
-            nickNameUI.text = pv.Owner.NickName;
             gun = transform.Find("MARMO3").GetComponent<Gun>();
+            if (!pv.IsMine) return;
         }
 
         private void Update()
