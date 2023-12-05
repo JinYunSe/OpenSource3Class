@@ -47,14 +47,14 @@ public class Ranking : MonoBehaviour, IPunObservable
             }
 
         }
-        
+
     }
 
     private void UpdatePlayerScore(string playerName)
     {
         playerScores[playerName] = count * 10;
         Debug.Log(playerName + " : " + playerScores[playerName] + "È¹µæ");
-        
+
     }
 
     private IEnumerator OutGame()
