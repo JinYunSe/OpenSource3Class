@@ -17,6 +17,7 @@ TagManager:
   - TrueTarget
   - FalseTarget
   - ScoreLine
+  - Canvas
   layers:
   - Default
   - TransparentFX

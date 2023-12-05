@@ -5,75 +5,30 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Ranking : MonoBehaviour, IPunObservable
+public class Ranking : MonoBehaviour
 {
-    private TextMeshProUGUI rankText;
-    private Dictionary<string, int> playerScores = new Dictionary<string, int>();
-    private int count = 1;
-
-    void Start()
+    private int playercount;
+    
+    private void Start()
     {
-        rankText = GameObject.Find("Rank").GetComponent<TextMeshProUGUI>();
-        StartCoroutine(InitializePlayerScores());
+        playercount = -1;
     }
 
-    private IEnumerator InitializePlayerScores()
+    private void Update()
     {
-        yield return null;
-
-        Debug.Log(PhotonNetwork.CurrentRoom.Players.Count + "명");
-
-        //플레이어 점수 초기값 설정
-        foreach (var player in PhotonNetwork.CurrentRoom.Players)
-        {
-            string playerName = player.Value.NickName;
-            Debug.Log(playerName + "입니다.");
-            playerScores[playerName] = 0;
-        }
+        GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log("플레이어 수 : "+player.Length);
+        playercount = player.Length;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        string name = other.gameObject.GetPhotonView().Controller.NickName;
-        foreach (var player in PhotonNetwork.CurrentRoom.Players)
-        {
-            string playerName = player.Value.NickName;
-            if (name.Equals(playerName))
-            {
-                UpdatePlayerScore(playerName);
-                rankText.text = "GameOver\nYour Score: " + playerScores[playerName];
-                count++;
-                PhotonNetwork.Destroy(other.gameObject);
-            }
-
-        }
-
-    }
-
-    private void UpdatePlayerScore(string playerName)
-    {
-        playerScores[playerName] = count * 10;
-        Debug.Log(playerName + " : " + playerScores[playerName] + "획득");
-
-    }
-
-    private IEnumerator OutGame()
-    {
-        yield return new WaitForSecondsRealtime(5);
-        PhotonNetwork.LoadLevel("UI");
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(playerScores);
-            stream.SendNext(count);
-        }
-        else
-        {
-            playerScores = (Dictionary<string, int>)stream.ReceiveNext();
-            count = (int)stream.ReceiveNext();
-        }
+        Debug.Log("타겟 사망 확인");
+        Transform endPanel = other.transform.Find("EndGameCanvas/EndGameUI");
+        if (playercount == 1) endPanel.Find("WinLoseText").GetComponent<Text>().text = "You Win!!";
+        else endPanel.Find("WinLoseText").GetComponent<Text>().text = "You Lose...";
+        endPanel.parent.gameObject.transform.parent = transform;
+        endPanel.parent.gameObject.SetActive(true);
+        PhotonNetwork.Destroy(other.gameObject);
     }
 }
