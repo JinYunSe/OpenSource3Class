@@ -9,7 +9,7 @@ public class ScoreLine : MonoBehaviour
     public bool[] scoreline = new bool[] { false, false, false, false };
     private bool finish = false;
     private Collider Respawn;
-    public GameObject character;
+    public GameObject[] Respown_spot = new GameObject[3];
 
     public int CheckTrigger(Collider other)
     {
@@ -48,7 +48,8 @@ public class ScoreLine : MonoBehaviour
         Fixed_TPC fixed_TPC = new Fixed_TPC();
         fixed_TPC = GetComponent<Fixed_TPC>();
         fixed_TPC.enabled = false;
-        transform.position = new Vector3(Respawn.transform.position.x, Respawn.transform.position.y, Respawn.transform.position.z);
+        transform.position = Respown_spot[0].transform.position;
+        Debug.Log("¼º°ø");
     }
 
     private void OnTriggerEnter(Collider other)
