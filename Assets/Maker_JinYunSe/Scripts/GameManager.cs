@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
                 {
                     Text TimerText = player[i].transform.Find("StaticUI/RemainTimeText").GetComponent<Text>();
                     TimerText.text = "Remain Time : " + timer; 
-                    if (timer <= 30)
+                    if (10 < timer && timer <= 30)
                     {
                         TimerText.color = Color.yellow;
                     }

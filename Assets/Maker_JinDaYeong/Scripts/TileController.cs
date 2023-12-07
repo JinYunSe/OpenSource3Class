@@ -6,7 +6,7 @@ using UnityEngine;
 public class TileController : MonoBehaviour
 {
     [SerializeField]
-    float time = 0.2f;
+    float time = 0.5f;
 
     public void OnTheFloor()
     {

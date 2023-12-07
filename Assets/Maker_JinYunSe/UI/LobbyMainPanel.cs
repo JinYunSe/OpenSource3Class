@@ -35,8 +35,6 @@ namespace Photon.Pun.Demo.Asteroids
         public Button StartGameButton;
         public GameObject PlayerListEntryPrefab;
 
-
-
         private Dictionary<string, RoomInfo> cachedRoomList;
         private Dictionary<string, GameObject> roomListEntries;
         private Dictionary<int, GameObject> playerListEntries;
@@ -49,26 +47,16 @@ namespace Photon.Pun.Demo.Asteroids
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 
-            if(PhotonNetwork.IsConnected )
+            if(PhotonNetwork.IsConnected)
             {
-                StartCoroutine(ReConnection());
+                PhotonNetwork.Disconnect();
+                PhotonNetwork.ConnectUsingSettings();
             }
             PhotonNetwork.AutomaticallySyncScene = true;
             cachedRoomList = new Dictionary<string, RoomInfo>();
             roomListEntries = new Dictionary<string, GameObject>();
 
             PlayerNameInput.text = "Player " + Random.Range(1000, 10000);
-        }
-
-        System.Collections.IEnumerator ReConnection()
-        {
-            yield return new WaitForSeconds(0.01f);
-            PhotonNetwork.LeaveLobby();
-            yield return new WaitForSeconds(0.02f);
-            PhotonNetwork.Disconnect();
-            yield return new WaitForSeconds(0.03f);
-            LoginPanel.SetActive(true);
-            SelectionPanel.SetActive(false);
         }
 
         #endregion
@@ -103,11 +91,6 @@ namespace Photon.Pun.Demo.Asteroids
         }
 
         public override void OnCreateRoomFailed(short returnCode, string message)
-        {
-            SetActivePanel(SelectionPanel.name);
-        }
-
-        public override void OnJoinRoomFailed(short returnCode, string message)
         {
             SetActivePanel(SelectionPanel.name);
         }
@@ -246,16 +229,10 @@ namespace Photon.Pun.Demo.Asteroids
         public void OnLoginButtonClicked()
         {
             string playerName = PlayerNameInput.text;
-
-            if (!playerName.Equals(""))
-            {
-                PhotonNetwork.LocalPlayer.NickName = playerName;
-                PhotonNetwork.ConnectUsingSettings();
-            }
-            else
-            {
-                Debug.LogError("Player Name is invalid.");
-            }
+            playerName = Regex.Replace(playerName, @"[^0-9a-zA-Z._]", string.Empty);
+            if (playerName.Equals(string.Empty)) return;
+            PhotonNetwork.LocalPlayer.NickName = playerName;
+            PhotonNetwork.ConnectUsingSettings();
         }
 
         public void OnRoomListButtonClicked()
