@@ -3686,7 +3686,7 @@ GameObject:
   - component: {fileID: 7721412560201465708}
   - component: {fileID: 5378392862155502197}
   m_Layer: 8
-  m_Name: Thank You Playing
+  m_Name: ThankYouPlayingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

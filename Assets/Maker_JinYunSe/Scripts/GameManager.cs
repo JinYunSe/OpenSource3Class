@@ -15,21 +15,50 @@ public class GameManager : MonoBehaviour
 {
     GameObject[] player;
     PhotonView[] photonView;
-    Stopwatch watch = new Stopwatch();
     bool timeOut = false;
-    float timer = 3600; 
+    int timer = 60; 
     void Start()
     {
         StartCoroutine(UserFind());
-        watch.Start();
+        StartCoroutine(TimerStart());
         StartCoroutine(TimeOutEndGame());
     }
-
     public IEnumerator UserFind()
     {
         yield return null;
         player = GameObject.FindGameObjectsWithTag("Player");
         photonView = new PhotonView[player.Length];
+        for(int i = 0; i < photonView.Length; i++)
+        {
+            photonView[i] = player[i].GetPhotonView();
+            if (photonView[i].IsMine) player[i].transform.Find("StaticUI").gameObject.SetActive(true);
+        }
+    }
+
+    public IEnumerator TimerStart()
+    {
+        do
+        {
+            yield return new WaitForSecondsRealtime(1);
+            timer -= 1;
+            for (int i = 0; i < player.Length; i++)
+            {
+                if (photonView[i].IsMine)
+                {
+                    Text TimerText = player[i].transform.Find("StaticUI/RemainTimeText").GetComponent<Text>();
+                    TimerText.text = "Remain Time : " + timer; 
+                    if (timer <= 30)
+                    {
+                        TimerText.color = Color.yellow;
+                    }
+                    else if (timer <= 10)
+                    {
+                        TimerText.color = Color.red;
+                    }
+                }
+            }
+            if (timer == 0) timeOut = true;
+        }while(!timeOut);
     }
 
     public IEnumerator TimeOutEndGame()
@@ -38,10 +67,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < player.Length; i++)
         {
             photonView[i] = player[i].GetPhotonView();
-            string timetemp = player[i].transform.Find("StaticUI/TimerText").GetComponent<Text>().text;
-            int time = int.Parse(Regex.Replace(timetemp, @"\D", string.Empty));
             Transform endGamePanel = player[i].transform.Find("EndGameCanvas/EndGameUI");
-            endGamePanel.Find("TimeText").GetComponent<Text>().text = "Time : " + time;
             bool GetTailCheck = player[i].transform.Find("Tails").gameObject.activeSelf;
             if (GetTailCheck) endGamePanel.Find("WinLoseText").GetComponent<Text>().text = "You Win!!";
             else endGamePanel.Find("WinLoseText").GetComponent<Text>().text = "You Lose...";
