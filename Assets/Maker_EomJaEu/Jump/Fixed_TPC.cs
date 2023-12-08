@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Realtime;
 using Unity.VisualScripting;
 using System.Collections;
+using UnityEngine.UI;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -125,11 +126,7 @@ namespace StarterAssets
         private PhotonView pv;
         private CinemachineVirtualCamera virtualCamera;
 
-        [SerializeField]
-        private SphereCollider RightHand;
-        [SerializeField]
-        private SphereCollider LeftHand;
-
+        public Text nickNameUI;
         private bool IsCurrentDeviceMouse
         {
             get
@@ -159,12 +156,17 @@ namespace StarterAssets
 
             pv = GetComponent<PhotonView>();
             virtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
-
+            nickNameUI.text = pv.Owner.NickName;
             // 자신의 캐릭터일 경우 시네머신 카메라를 연결
             if (pv.IsMine)
             {
+                nickNameUI.gameObject.SetActive(false);
                 virtualCamera.Follow = CameraRoot.transform;
                 virtualCamera.LookAt = CameraRoot.transform;
+            }
+            else
+            {
+                nickNameUI.gameObject.SetActive(true);
             }
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
@@ -190,13 +192,9 @@ namespace StarterAssets
 
         private void OnHand()
         {
-            RightHand.enabled = true;
-            LeftHand.enabled = true;
         }
         private void OffHand()
         {
-            RightHand.enabled = false;
-            LeftHand.enabled = false;
         }
 
         private void MouseLeft()

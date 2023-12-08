@@ -52,10 +52,6 @@ public class GroundCheck : MonoBehaviour
         {
             return 2;
         }
-        else if(checker && hit.collider.CompareTag("OutofGround"))
-        {
-            return 3;
-        }
         return 0;
     }
 

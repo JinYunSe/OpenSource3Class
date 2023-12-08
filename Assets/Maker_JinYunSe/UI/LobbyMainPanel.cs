@@ -56,7 +56,7 @@ namespace Photon.Pun.Demo.Asteroids
             cachedRoomList = new Dictionary<string, RoomInfo>();
             roomListEntries = new Dictionary<string, GameObject>();
 
-            PlayerNameInput.text = "Player " + Random.Range(1000, 10000);
+            PlayerNameInput.text = "Player" + Random.Range(1000, 10000);
         }
 
         #endregion
@@ -91,6 +91,11 @@ namespace Photon.Pun.Demo.Asteroids
         }
 
         public override void OnCreateRoomFailed(short returnCode, string message)
+        {
+            SetActivePanel(SelectionPanel.name);
+        }
+
+        public override void OnJoinRoomFailed(short returnCode, string message)
         {
             SetActivePanel(SelectionPanel.name);
         }
