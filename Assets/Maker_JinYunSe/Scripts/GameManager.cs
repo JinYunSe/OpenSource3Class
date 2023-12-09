@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     GameObject[] player;
     PhotonView[] photonView;
     bool timeOut = false;
-    int timer = 60; 
+    int timer = 120; 
     void Start()
     {
         StartCoroutine(UserFind());
