@@ -37,7 +37,9 @@ public class ScoreLine : MonoBehaviour
         }
         else if (other.gameObject.name == "UnderGround")
         {
-            Respawn_code();
+            JumpGameManager jumpGameManager = new JumpGameManager();
+            jumpGameManager = GetComponent<JumpGameManager>();
+            jumpGameManager.EndGame(gameObject);
             Debug.Log("ÅÚÆ÷");
         }
             return 0;

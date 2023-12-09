@@ -2553,6 +2553,7 @@ GameObject:
   - component: {fileID: 1263269164402600188}
   - component: {fileID: 8035347594777151284}
   - component: {fileID: 5222432817435935022}
+  - component: {fileID: -6495494345391995670}
   m_Layer: 8
   m_Name: EomJaEuCharacter
   m_TagString: Player
@@ -2837,6 +2838,23 @@ MonoBehaviour:
     m_Bits: 513
   speed: 0
   drawGizmo: 1
+--- !u!114 &-6495494345391995670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5222432817435935012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec6270d78f7bdd4fa13f245e49df7a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreline: 00000000
+  Respown_spot:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &5358216765970625314
 GameObject:
   m_ObjectHideFlags: 0

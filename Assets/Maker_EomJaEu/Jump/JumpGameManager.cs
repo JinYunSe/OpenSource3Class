@@ -25,7 +25,7 @@ public class JumpGameManager : MonoBehaviour
         player = GameObject.FindGameObjectsWithTag("Player");
     }
 
-    void EndGame(GameObject winner)
+    public void EndGame(GameObject winner)
     {
         Time.timeScale = 0;
         playercount = player.Length;
@@ -33,8 +33,15 @@ public class JumpGameManager : MonoBehaviour
         {
             if (player[i] == winner)
             {
-                
-                //¼öÁ¤
+                Transform endPanel = player[i].transform.Find("EndGameCanvas/EndGameUI");
+                endPanel.Find("WinLoseText").GetComponent<Text>().text = "You Win!!";
+                endPanel.parent.gameObject.SetActive(true);
+            }
+            else
+            {
+                Transform endPanel = player[i].transform.Find("EndGameCanvas/EndGameUI");
+                endPanel.Find("WinLoseText").GetComponent<Text>().text = "You Lose...";
+                endPanel.parent.gameObject.SetActive(true);
             }
         }
     }
