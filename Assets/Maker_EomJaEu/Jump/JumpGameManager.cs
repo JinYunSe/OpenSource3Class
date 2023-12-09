@@ -10,38 +10,43 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class JumpGameManager : MonoBehaviour
+public class EndLineScripts : MonoBehaviour
 {
     private int playercount;
     private GameObject[] player;
-
+    private PhotonView[] photonViews;
     void Start()
     {
+        StartCoroutine(FindUser());
         playercount = -1;
     }
 
-    private void Update()
+    IEnumerator FindUser()
     {
+        yield return null;
         player = GameObject.FindGameObjectsWithTag("Player");
+        playercount = player.Length;
+        photonViews = new PhotonView[playercount];
     }
 
-    public void EndGame(GameObject winner)
+    private void OnTriggerEnter(Collider other)
     {
-        Time.timeScale = 0;
-        playercount = player.Length;
+        PhotonNetwork.Destroy(gameObject);
         for (int i = 0; i < player.Length; i++)
         {
-            if (player[i] == winner)
+            if (photonViews[i].IsMine)
             {
                 Transform endPanel = player[i].transform.Find("EndGameCanvas/EndGameUI");
                 endPanel.Find("WinLoseText").GetComponent<Text>().text = "You Win!!";
                 endPanel.parent.gameObject.SetActive(true);
+                endPanel.parent.gameObject.transform.parent = transform;
             }
             else
             {
                 Transform endPanel = player[i].transform.Find("EndGameCanvas/EndGameUI");
                 endPanel.Find("WinLoseText").GetComponent<Text>().text = "You Lose...";
                 endPanel.parent.gameObject.SetActive(true);
+                endPanel.parent.gameObject.transform.parent = transform;
             }
         }
     }

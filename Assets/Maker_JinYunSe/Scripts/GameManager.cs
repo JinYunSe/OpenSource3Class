@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(TimerStart());
         StartCoroutine(TimeOutEndGame());
     }
-    public IEnumerator UserFind()
+    private IEnumerator UserFind()
     {
         yield return null;
         player = GameObject.FindGameObjectsWithTag("Player");
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerator TimerStart()
+    private IEnumerator TimerStart()
     {
         do
         {
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         }while(!timeOut);
     }
 
-    public IEnumerator TimeOutEndGame()
+    private IEnumerator TimeOutEndGame()
     {
         yield return new WaitUntil(()=>(timeOut == true));
         for (int i = 0; i < player.Length; i++)

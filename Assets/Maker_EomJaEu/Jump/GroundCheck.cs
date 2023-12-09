@@ -93,12 +93,4 @@ public class GroundCheck : MonoBehaviour
             Fixed_TPC.set_normalgravity();
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        Fixed_TPC Fixed_TPC = GetComponent<Fixed_TPC>();
-        if (other.CompareTag("ScoreLine"))
-        {
-            Debug.Log("점수 추가");
-        }
-    }
 }
