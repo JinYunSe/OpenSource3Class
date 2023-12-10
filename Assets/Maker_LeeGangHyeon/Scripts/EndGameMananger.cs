@@ -11,7 +11,7 @@ public class EndGameMananger : MonoBehaviour
     PhotonView[] photonView;
     bool timeOut = false;
     int timer = 60;
-    int winer_index = -1;
+    int winner_index = -1;
     void Start()
     {
         StartCoroutine(UserFind());
@@ -70,14 +70,15 @@ public class EndGameMananger : MonoBehaviour
                 int score2 = int.Parse(Regex.Replace(score2_temp, @"\D", string.Empty));
                 if (score1 > score2)
                 {
-                    winer_index = i;
+                    winner_index = i;
                 }
                 else
                 {
-                    winer_index = j;
+                    winner_index = j;
                 }
             }
         }
+        Debug.Log("winner" + winner_index);
         StartCoroutine(TimeOutEndGame());
     }
     private IEnumerator TimeOutEndGame()
@@ -87,7 +88,11 @@ public class EndGameMananger : MonoBehaviour
         {
             photonView[i] = player[i].GetPhotonView();
             Transform endGamePanel = player[i].transform.Find("EndGameCanvas/EndGameUI");
-            if (winer_index == i) endGamePanel.Find("WinLoseText").GetComponent<Text>().text = "You Win!!";
+            if (winner_index == i)
+            {
+                endGamePanel.Find("WinLoseText").GetComponent<Text>().text = "You Win!!";
+                Debug.Log(winner_index + ", " + i + " 동작 확인");
+            }
             else endGamePanel.Find("WinLoseText").GetComponent<Text>().text = "You Lose...";
             if (photonView[i].IsMine) endGamePanel.parent.gameObject.SetActive(true);
         }
