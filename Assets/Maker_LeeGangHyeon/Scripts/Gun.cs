@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 using StarterAssets;
+using System.Collections.Generic;
 
 public class Gun : MonoBehaviour {
 
@@ -12,6 +13,13 @@ public class Gun : MonoBehaviour {
     public Transform RayPosition;
     public GameObject bullet;
     private SphereCollider sphereCollider;
+
+
+    private bool isTrueTargetDestroyed = false;
+    private float trueTargetDestroyTime;
+
+    private ShootingGame shootingGameScript;
+
     private void Start()
     {
         controller = transform.root.GetComponent<LeeGangHyeonThirdPersonController>();
@@ -19,11 +27,8 @@ public class Gun : MonoBehaviour {
         sphereCollider.enabled = false;
         audioSource = GetComponent<AudioSource>();
         audioSource.Stop();
-    }
-    private void OnDrawGizmos()
-    {
-        //Gizmos.color = Color.green;
-        //Gizmos.DrawRay(RayPosition.position, RayPosition.transform.right * -7);
+
+        shootingGameScript = FindObjectOfType<ShootingGame>();
     }
     public void Shoot()
     {
@@ -35,13 +40,39 @@ public class Gun : MonoBehaviour {
         if (other.CompareTag("TrueTarget"))
         {
             Destroy(other.gameObject);
-            Score.score += 10;
+
+            // TrueTarget 스폰 시간 목록을 가져와서 현재 시간과 비교
+            List<float> trueTargetSpawnTimes = shootingGameScript.GetTrueTargetSpawnTimes();
+            float timeSinceSpawn = Time.time - trueTargetSpawnTimes[trueTargetSpawnTimes.Count - 1];
+
+            int scoreToAdd = CalculateScore(timeSinceSpawn);
+            Score.score += scoreToAdd;
         }
         else if (other.CompareTag("FalseTarget"))
         {
             Destroy(other.gameObject);
             Score.score -= 5;
         }
+    }
+    private int CalculateScore(float timeSinceSpawn)
+    {
+        int score = 0;
+
+        // 시간에 따라 점수 부여 로직 추가
+        if (timeSinceSpawn <= 0.5f)
+        {
+            score = 7;
+        }
+        else if (timeSinceSpawn <= 0.8f)
+        {
+            score = 5;
+        }
+        else if (timeSinceSpawn <= 1.9f)
+        {
+            score = 3;
+        }
+
+        return score;
     }
 }
 

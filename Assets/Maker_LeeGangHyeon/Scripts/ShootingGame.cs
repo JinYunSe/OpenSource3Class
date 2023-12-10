@@ -8,7 +8,7 @@ public class ShootingGame : MonoBehaviour
     public GameObject FalseTarget;
 
     // 게임 관련 변수
-    private float gameTime = 10f; // 게임 총 지속 시간 (초)
+    private float gameTime = 60f; // 게임 총 지속 시간 (초)
     private float timer = 0f; // 경과 시간을 추적하는 타이머
     private bool gameIsRunning = true; // 게임이 진행 중인지 여부를 나타내는 플래그
 
@@ -16,8 +16,11 @@ public class ShootingGame : MonoBehaviour
     private List<Vector3>[] spawnPositionGroups;
     private List<Vector3> usedSpawnPositions = new List<Vector3>(); // 사용된 스폰 위치를 추적하는 리스트
 
+    private List<float> trueTargetSpawnTimes = new List<float>();
+
     void Start()
     {
+
         // 스폰 위치 그룹 초기화 및 일정한 딜레이와 반복 간격으로 타겟을 스폰 시작
         InitializeSpawnPositionGroups();
         InvokeRepeating("SpawnTargets", 2f, 3f);
@@ -69,23 +72,32 @@ public class ShootingGame : MonoBehaviour
 
     void SpawnTargets()
     {
-        // 각 스폰 위치 그룹에 대해 반복
         foreach (var group in spawnPositionGroups)
         {
-                // 타겟이 TrueTarget인지 FalseTarget인지 랜덤으로 결정
-                bool isTrueTarget = Random.Range(0, 2) == 0;
+            // 타겟이 TrueTarget인지 FalseTarget인지 랜덤으로 결정
+            bool isTrueTarget = Random.Range(0, 2) == 0;
 
-                // 현재 그룹의 각 스폰 위치에 대해 반복
-                foreach (var spawnPosition in group)
+            // 현재 그룹의 각 스폰 위치에 대해 반복
+            foreach (var spawnPosition in group)
+            {
+                // 스폰 위치에서 타겟을 생성하고 회전 설정
+                GameObject target = Instantiate(isTrueTarget ? TrueTarget : FalseTarget, spawnPosition, Quaternion.identity);
+                target.transform.rotation = Quaternion.Euler(90f, 0f, -180f);
+
+                // 타겟이 TrueTarget이면 현재 시간을 저장
+                if (isTrueTarget)
                 {
-                    // 스폰 위치에서 타겟을 생성하고 회전 설정
-                    GameObject target = Instantiate(isTrueTarget ? TrueTarget : FalseTarget, spawnPosition, Quaternion.identity);
-                    target.transform.rotation = Quaternion.Euler(90f, 0f, -180f);
+                    trueTargetSpawnTimes.Add(Time.time);
+                }
 
                 // 2초 후에 생성된 타겟 파괴
                 Destroy(target, 2f);
             }
         }
+    }
+    public List<float> GetTrueTargetSpawnTimes()
+    {
+        return trueTargetSpawnTimes;
     }
 
     void EndGame()
