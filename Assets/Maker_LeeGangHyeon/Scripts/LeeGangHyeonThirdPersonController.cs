@@ -6,6 +6,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
 namespace StarterAssets
 {
     [RequireComponent(typeof(CharacterController))]
@@ -19,7 +21,7 @@ namespace StarterAssets
 #endif
         private GunAssetsInputs _input;
         private Gun gun;
-        private PhotonView pv;
+        public PhotonView pv;
         [SerializeField]
         private SphereCollider sphereCollider;
         private bool _hasAnimator;
@@ -28,6 +30,12 @@ namespace StarterAssets
 
         private int _animIDRifleAim;
         private int _animIDRifleFire;
+
+        [SerializeField]
+        private GameObject MainCanvas;
+        
+        [SerializeField]
+        private GameObject NickName;
         private bool IsCurrentDeviceMouse
         {
             get
@@ -52,7 +60,16 @@ namespace StarterAssets
             AssignAnimationIDs();
             pv = GetComponent<PhotonView>();
             gun = transform.Find("MARMO3").GetComponent<Gun>();
-            if (!pv.IsMine) return;
+            if (pv.IsMine)
+            {
+                MainCanvas.SetActive(true);
+                NickName.SetActive(false);
+            }
+            else
+            {
+                MainCanvas.SetActive(false);
+                NickName.SetActive(true);
+            }
         }
 
         private void Update()
