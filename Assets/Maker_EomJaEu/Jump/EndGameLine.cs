@@ -30,10 +30,17 @@ public class EndGameLine : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Transform endPanel = other.transform.Find("EndGameCanvas/EndGameUI");
-        if (playercount == 1) endPanel.Find("WinLoseText").GetComponent<Text>().text = "You Win!!";
-        else endPanel.Find("WinLoseText").GetComponent<Text>().text = "You Lose...";
-        endPanel.parent.gameObject.SetActive(true);
         PhotonNetwork.Destroy(gameObject);
+        string name = other.gameObject.GetPhotonView().Controller.NickName;
+        for(int i = 0; i <  playercount; i++)
+        {
+            Transform otherPersonEndPanel = player[i].transform.Find("EndGameCanvas/EndGameUI");
+            if (player[i].GetPhotonView().Controller.NickName.Equals(name))
+            {
+                otherPersonEndPanel.Find("WinLoseText").GetComponent<Text>().text = "You Win!!";
+            }
+            else otherPersonEndPanel.Find("WinLoseText").GetComponent<Text>().text = "You Lose...";
+            if (photonView[i].IsMine) otherPersonEndPanel.parent.gameObject.SetActive(true);
+        }
     }
 }

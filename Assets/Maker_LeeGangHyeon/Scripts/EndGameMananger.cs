@@ -10,7 +10,7 @@ public class EndGameMananger : MonoBehaviour
     GameObject[] player;
     PhotonView[] photonView;
     bool timeOut = false;
-    int timer = 10;
+    int timer = 60;
     int winer_index = -1;
     void Start()
     {

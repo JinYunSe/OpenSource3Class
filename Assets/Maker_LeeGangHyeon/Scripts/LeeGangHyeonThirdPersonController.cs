@@ -21,6 +21,7 @@ namespace StarterAssets
 #endif
         private GunAssetsInputs _input;
         private Gun gun;
+        [HideInInspector]
         public PhotonView pv;
         [SerializeField]
         private SphereCollider sphereCollider;
@@ -33,9 +34,7 @@ namespace StarterAssets
 
         [SerializeField]
         private GameObject MainCanvas;
-        
-        [SerializeField]
-        private GameObject NickName;
+
         private bool IsCurrentDeviceMouse
         {
             get
@@ -63,12 +62,10 @@ namespace StarterAssets
             if (pv.IsMine)
             {
                 MainCanvas.SetActive(true);
-                NickName.SetActive(false);
             }
             else
             {
                 MainCanvas.SetActive(false);
-                NickName.SetActive(true);
             }
         }
 
