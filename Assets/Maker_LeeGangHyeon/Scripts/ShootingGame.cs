@@ -8,7 +8,7 @@ public class ShootingGame : MonoBehaviour
     public GameObject FalseTarget;
 
     // 게임 관련 변수
-    private float gameTime = 60f; // 게임 총 지속 시간 (초)
+    private float gameTime = 10f; // 게임 총 지속 시간 (초)
     private float timer = 0f; // 경과 시간을 추적하는 타이머
     private bool gameIsRunning = true; // 게임이 진행 중인지 여부를 나타내는 플래그
 
@@ -93,5 +93,16 @@ public class ShootingGame : MonoBehaviour
         // 게임 종료 및 메시지 로그
         gameIsRunning = false;
         Debug.Log("게임 종료!");
+        GameObject endGameCanvas = GameObject.Find("EndGameCanvas");
+        if (endGameCanvas != null)
+        {
+            // EndGameUI를 자식으로 가진 경우
+            Transform endGameUI = endGameCanvas.transform.Find("EndGameUI");
+            if (endGameUI != null)
+            {
+                // 원하는 동작 수행 (예: 활성화)
+                endGameUI.gameObject.SetActive(true);
+            }
+        }
     }
 }

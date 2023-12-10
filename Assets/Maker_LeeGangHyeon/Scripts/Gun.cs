@@ -35,10 +35,12 @@ public class Gun : MonoBehaviour {
         if (other.CompareTag("TrueTarget"))
         {
             Destroy(other.gameObject);
+            Score.score += 10;
         }
         else if (other.CompareTag("FalseTarget"))
         {
             Destroy(other.gameObject);
+            Score.score -= 5;
         }
     }
 }
