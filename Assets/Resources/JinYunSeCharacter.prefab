@@ -904,7 +904,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Remain Time : 120'
+  m_Text: 'Remain Time : 60'
 --- !u!1 &1916005693767981871
 GameObject:
   m_ObjectHideFlags: 0
