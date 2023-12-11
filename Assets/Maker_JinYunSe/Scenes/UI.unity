@@ -4136,7 +4136,7 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: FallingFloor
       m_Image: {fileID: 0}
-    - m_Text: Jump
+    - m_Text: Run
       m_Image: {fileID: 0}
     - m_Text: SwiftShooter
       m_Image: {fileID: 0}
